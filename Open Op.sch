@@ -1,0 +1,426 @@
+EESchema Schematic File Version 4
+LIBS:Open Op-cache
+EELAYER 26 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 4
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Memory_Flash:M25PX32-VMW U2
+U 1 1 5B950528
+P 7750 4500
+F 0 "U2" H 8391 4546 50  0000 L CNN
+F 1 "M25PX32-VMW" H 8391 4455 50  0000 L CNN
+F 2 "SMD_Packages:SOIC-8-N" H 8400 4550 50  0001 C CNN
+F 3 "https://www.micron.com/~/media/documents/products/data-sheet/nor-flash/serial-nor/m25px/m25px32.pdf" H 7900 4400 50  0001 C CNN
+	1    7750 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR05
+U 1 1 5B950A66
+P 7750 4000
+F 0 "#PWR05" H 7750 3850 50  0001 C CNN
+F 1 "+3V3" H 7765 4173 50  0000 C CNN
+F 2 "" H 7750 4000 50  0001 C CNN
+F 3 "" H 7750 4000 50  0001 C CNN
+	1    7750 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR08
+U 1 1 5B950AEF
+P 6350 4500
+F 0 "#PWR08" H 6350 4350 50  0001 C CNN
+F 1 "+3V3" H 6365 4673 50  0000 C CNN
+F 2 "" H 6350 4500 50  0001 C CNN
+F 3 "" H 6350 4500 50  0001 C CNN
+	1    6350 4500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6350 4500 6350 4600
+Wire Wire Line
+	6350 4600 6350 4700
+Connection ~ 6350 4600
+$Comp
+L power:GND #PWR010
+U 1 1 5B955F44
+P 7750 5000
+F 0 "#PWR010" H 7750 4750 50  0001 C CNN
+F 1 "GND" H 7755 4827 50  0000 C CNN
+F 2 "" H 7750 5000 50  0001 C CNN
+F 3 "" H 7750 5000 50  0001 C CNN
+	1    7750 5000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5B961A78
+P 6700 4300
+F 0 "R1" H 6770 4346 50  0000 L CNN
+F 1 "10K" H 6770 4255 50  0000 L CNN
+F 2 "Resistors_SMD:R_0805" V 6630 4300 50  0001 C CNN
+F 3 "~" H 6700 4300 50  0001 C CNN
+	1    6700 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR06
+U 1 1 5B961C3E
+P 6700 4150
+F 0 "#PWR06" H 6700 4000 50  0001 C CNN
+F 1 "+3V3" H 6715 4323 50  0000 C CNN
+F 2 "" H 6700 4150 50  0001 C CNN
+F 3 "" H 6700 4150 50  0001 C CNN
+	1    6700 4150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7150 4500 6700 4500
+Wire Wire Line
+	6700 4450 6700 4500
+Connection ~ 6700 4500
+Wire Wire Line
+	6700 4500 6600 4500
+Wire Wire Line
+	6350 4600 7150 4600
+Wire Wire Line
+	6350 4700 7150 4700
+$Comp
+L OpenOpParts:TFT_TOUCH_SPI U3
+U 1 1 5BA764CE
+P 9600 4800
+F 0 "U3" H 9681 5715 50  0000 C CNN
+F 1 "TFT_TOUCH_SPI" H 9681 5624 50  0000 C CNN
+F 2 "OpenOpParts:2.4inTFT_TOUCH_SPI" H 9600 3950 50  0001 C CNN
+F 3 "" H 9600 3950 50  0001 C CNN
+	1    9600 4800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR012
+U 1 1 5BA769B9
+P 10600 5450
+F 0 "#PWR012" H 10600 5300 50  0001 C CNN
+F 1 "+5V" H 10615 5623 50  0000 C CNN
+F 2 "" H 10600 5450 50  0001 C CNN
+F 3 "" H 10600 5450 50  0001 C CNN
+	1    10600 5450
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR011
+U 1 1 5BA76BF9
+P 10600 5150
+F 0 "#PWR011" H 10600 5000 50  0001 C CNN
+F 1 "+3V3" H 10615 5323 50  0000 C CNN
+F 2 "" H 10600 5150 50  0001 C CNN
+F 3 "" H 10600 5150 50  0001 C CNN
+	1    10600 5150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR07
+U 1 1 5BA76DE1
+P 10600 4450
+F 0 "#PWR07" H 10600 4300 50  0001 C CNN
+F 1 "+5V" H 10615 4623 50  0000 C CNN
+F 2 "" H 10600 4450 50  0001 C CNN
+F 3 "" H 10600 4450 50  0001 C CNN
+	1    10600 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 5BA76EE9
+P 10600 4600
+F 0 "R2" H 10670 4646 50  0000 L CNN
+F 1 "100" H 10670 4555 50  0000 L CNN
+F 2 "Resistors_SMD:R_0805" V 10530 4600 50  0001 C CNN
+F 3 "~" H 10600 4600 50  0001 C CNN
+	1    10600 4600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10600 4750 10100 4750
+Wire Wire Line
+	10600 5150 10100 5150
+Wire Wire Line
+	10100 5450 10600 5450
+$Sheet
+S 1800 5750 750  850 
+U 5BA91469
+F0 "keypad" 50
+F1 "keypad.sch" 50
+$EndSheet
+$Sheet
+S 3550 5750 900  1000
+U 5BA9FA00
+F0 "boost and charge" 50
+F1 "boost_and_charge.sch" 50
+$EndSheet
+$Comp
+L power:VBUS #PWR03
+U 1 1 5BAB918A
+P 5900 3950
+F 0 "#PWR03" H 5900 3800 50  0001 C CNN
+F 1 "VBUS" H 5915 4123 50  0000 C CNN
+F 2 "" H 5900 3950 50  0001 C CNN
+F 3 "" H 5900 3950 50  0001 C CNN
+	1    5900 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR04
+U 1 1 5BABBFA7
+P 6150 3950
+F 0 "#PWR04" H 6150 3800 50  0001 C CNN
+F 1 "+5V" H 6165 4123 50  0000 C CNN
+F 2 "" H 6150 3950 50  0001 C CNN
+F 3 "" H 6150 3950 50  0001 C CNN
+	1    6150 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6150 3950 6150 4050
+Wire Wire Line
+	2650 4550 2650 4900
+$Comp
+L power:GND #PWR09
+U 1 1 5BAC0B16
+P 2650 4900
+F 0 "#PWR09" H 2650 4650 50  0001 C CNN
+F 1 "GND" H 2655 4727 50  0000 C CNN
+F 2 "" H 2650 4900 50  0001 C CNN
+F 3 "" H 2650 4900 50  0001 C CNN
+	1    2650 4900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2650 2150 2650 1900
+$Comp
+L power:+3V3 #PWR02
+U 1 1 5BAC1E8F
+P 2650 1900
+F 0 "#PWR02" H 2650 1750 50  0001 C CNN
+F 1 "+3V3" H 2665 2073 50  0000 C CNN
+F 2 "" H 2650 1900 50  0001 C CNN
+F 3 "" H 2650 1900 50  0001 C CNN
+	1    2650 1900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2650 750  2650 1000
+$Comp
+L power:GND #PWR01
+U 1 1 5BAC32DC
+P 2650 1000
+F 0 "#PWR01" H 2650 750 50  0001 C CNN
+F 1 "GND" H 2655 827 50  0000 C CNN
+F 2 "" H 2650 1000 50  0001 C CNN
+F 3 "" H 2650 1000 50  0001 C CNN
+	1    2650 1000
+	1    0    0    -1  
+$EndComp
+$Sheet
+S 9500 750  1100 1250
+U 5BAC34FB
+F0 "SGTL5000" 50
+F1 "SGTL5000.sch" 50
+$EndSheet
+Text GLabel 5300 4350 2    50   Input ~ 0
+LRCLK
+Text GLabel 5300 4450 2    50   Input ~ 0
+TX
+Text GLabel 5300 4750 2    50   Input ~ 0
+SCL
+Text GLabel 5300 4850 2    50   Input ~ 0
+SDA
+Text GLabel 3300 4650 0    50   Input ~ 0
+RX
+Text GLabel 3300 4750 0    50   Input ~ 0
+SCLK
+Text GLabel 3300 1750 0    50   Input ~ 0
+BCLK
+Text GLabel 3300 1950 0    50   Input ~ 0
+MCLK
+Text GLabel 7150 4400 0    50   Input ~ 0
+SCLK
+Text GLabel 7150 4300 0    50   Input ~ 0
+MOSI
+Text GLabel 8350 4300 2    50   Input ~ 0
+MISO
+Text GLabel 6600 4500 0    50   Input ~ 0
+CS
+Text GLabel 3300 1450 0    50   Input ~ 0
+CS
+Text GLabel 3300 1550 0    50   Input ~ 0
+MOSI
+Text GLabel 3300 2050 0    50   Input ~ 0
+MISO
+Text GLabel 10100 4650 2    50   Input ~ 0
+MISO
+Text GLabel 10100 4850 2    50   Input ~ 0
+SCLK
+Text GLabel 10100 4950 2    50   Input ~ 0
+MOSI
+Text GLabel 10100 5050 2    50   Input ~ 0
+TFT_DC
+Text GLabel 5300 4550 2    50   Input ~ 0
+TFT_CS
+Text GLabel 5300 4650 2    50   Input ~ 0
+TFT_DC
+Text GLabel 3300 2650 0    50   Input ~ 0
+KEYPAD_R0
+Text GLabel 3300 2750 0    50   Input ~ 0
+KEYPAD_R1
+Text GLabel 3300 2850 0    50   Input ~ 0
+KEYPAD_R2
+Text GLabel 3300 2950 0    50   Input ~ 0
+KEYPAD_R3
+Text GLabel 3300 3850 0    50   Input ~ 0
+KEYPAD_C0
+Text GLabel 3300 3950 0    50   Input ~ 0
+KEYPAD_C1
+Text GLabel 3300 4050 0    50   Input ~ 0
+KEYPAD_C2
+Text GLabel 3300 4150 0    50   Input ~ 0
+KEYPAD_C3
+Text GLabel 5300 4150 2    50   Input ~ 0
+AGND
+Wire Wire Line
+	10100 5350 10300 5350
+Wire Wire Line
+	10300 5350 10300 5600
+$Comp
+L power:GND #PWR013
+U 1 1 5BAE1DE1
+P 10300 5600
+F 0 "#PWR013" H 10300 5350 50  0001 C CNN
+F 1 "GND" H 10305 5427 50  0000 C CNN
+F 2 "" H 10300 5600 50  0001 C CNN
+F 3 "" H 10300 5600 50  0001 C CNN
+	1    10300 5600
+	1    0    0    -1  
+$EndComp
+Text GLabel 3300 4250 0    50   Input ~ 0
+KEYPAD_C4
+Text GLabel 3300 2550 0    50   Input ~ 0
+KEYPAD_R4
+Text GLabel 3300 3050 0    50   Input ~ 0
+VOLUME
+$Comp
+L OpenOpParts:TEENSY3.6-OpenOp U1
+U 1 1 5B903484
+P 4300 2850
+F 0 "U1" H 4300 5237 60  0000 C CNN
+F 1 "Teensy3.6" H 4300 5131 60  0000 C CNN
+F 2 "OpenOpParts:Teensy35_36" H 4300 2850 60  0001 C CNN
+F 3 "" H 4300 2850 60  0000 C CNN
+	1    4300 2850
+	1    0    0    -1  
+$EndComp
+Text GLabel 10100 5250 2    50   Input ~ 0
+TFT_CS
+Text GLabel 10100 4350 2    50   Input ~ 0
+MOSI
+Text GLabel 10100 4250 2    50   Input ~ 0
+MISO
+Text GLabel 10100 4550 2    50   Input ~ 0
+SCLK
+Text GLabel 10100 4450 2    50   Input ~ 0
+TOUCH_CS
+Text GLabel 3300 1350 0    50   Input ~ 0
+PCTL
+Text GLabel 5300 3650 2    50   Input ~ 0
+PWR_BTN
+Text GLabel 3300 3650 0    50   Input ~ 0
+TOUCH_CS
+Text GLabel 10100 4150 2    50   Input ~ 0
+TOUCH_IRQ
+Text GLabel 3300 2450 0    50   Input ~ 0
+E1B
+Text GLabel 3300 2350 0    50   Input ~ 0
+E1A
+Text GLabel 3300 3750 0    50   Input ~ 0
+E2B
+Text GLabel 5300 4950 2    50   Input ~ 0
+E2A
+Text GLabel 3300 1850 0    50   Input ~ 0
+E3B
+Text GLabel 3300 2250 0    50   Input ~ 0
+E3A
+Text GLabel 3300 1150 0    50   Input ~ 0
+E4A
+Text GLabel 3300 1050 0    50   Input ~ 0
+E4B
+Text GLabel 3300 4850 0    50   Input ~ 0
+RGB_DATA
+Text GLabel 3300 4950 0    50   Input ~ 0
+RGB_CLOCK
+Wire Wire Line
+	2650 4550 3300 4550
+Text GLabel 5300 3750 2    50   Input ~ 0
+BATT_LEVEL
+Wire Wire Line
+	5300 3950 5900 3950
+Wire Wire Line
+	5300 4050 6150 4050
+Text GLabel 3300 1250 0    50   Input ~ 0
+BATT_STAT2
+Text GLabel 3300 950  0    50   Input ~ 0
+BATT_STAT1
+Wire Wire Line
+	2650 750  3300 750 
+Wire Wire Line
+	2650 2150 3300 2150
+Text GLabel 3300 850  0    50   Input ~ 0
+REC_LED
+$Comp
+L Connector:Conn_01x04_Male J3
+U 1 1 5BA130B2
+P 6500 1800
+F 0 "J3" H 6606 2078 50  0000 C CNN
+F 1 "Conn_01x04_Male" H 6606 1987 50  0000 C CNN
+F 2 "Connectors_JST:JST_SH_BM04B-SRSS-TB_04x1.00mm_Straight" H 6500 1800 50  0001 C CNN
+F 3 "~" H 6500 1800 50  0001 C CNN
+	1    6500 1800
+	1    0    0    -1  
+$EndComp
+Text GLabel 6700 1800 2    50   Input ~ 0
+SDA
+Text GLabel 6700 1900 2    50   Input ~ 0
+SCL
+$Comp
+L power:+3V3 #PWR?
+U 1 1 5BA1378F
+P 6700 1700
+F 0 "#PWR?" H 6700 1550 50  0001 C CNN
+F 1 "+3V3" H 6715 1873 50  0000 C CNN
+F 2 "" H 6700 1700 50  0001 C CNN
+F 3 "" H 6700 1700 50  0001 C CNN
+	1    6700 1700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5BA13809
+P 6700 2000
+F 0 "#PWR?" H 6700 1750 50  0001 C CNN
+F 1 "GND" H 6705 1827 50  0000 C CNN
+F 2 "" H 6700 2000 50  0001 C CNN
+F 3 "" H 6700 2000 50  0001 C CNN
+	1    6700 2000
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC

@@ -1,0 +1,6 @@
+(sym_lib_table
+  (lib (name WS2812-2020)(type Legacy)(uri /Users/chris/Downloads/WS2812-2020/WS2812-2020.lib)(options "")(descr ""))
+  (lib (name SparkFun-IC-Analog)(type Legacy)(uri /Users/chris/Downloads/KiCad-Library-master/SparkFun-IC-Analog.lib)(options "")(descr ""))
+  (lib (name MyJacks)(type Legacy)(uri "/Users/chris/Documents/Open Op/MyJacks.lib")(options "")(descr ""))
+  (lib (name OpenOpParts)(type Legacy)(uri "/Users/chris/Documents/Open Op/OpenOpParts.lib")(options "")(descr ""))
+)
