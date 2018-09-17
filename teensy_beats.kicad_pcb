@@ -373,7 +373,7 @@
     (add_net VPCC)
   )
 
-  (module OpenOpParts:2.4inTFT_TOUCH_SPI (layer F.Cu) (tedit 5B9F2FBC) (tstamp 5BA05392)
+  (module teensy_beats_parts:2.4inTFT_TOUCH_SPI (layer F.Cu) (tedit 5B9F2FBC) (tstamp 5BA05392)
     (at 95.4 58.64)
     (path /5BA764CE)
     (fp_text reference U3 (at -32.26 -13.87) (layer F.SilkS)
@@ -422,7 +422,7 @@
       (net 54 TOUCH_IRQ))
   )
 
-  (module OpenOpParts:Teensy35_36 (layer F.Cu) (tedit 5B9A899E) (tstamp 5B932D8B)
+  (module teensy_beats_parts:Teensy35_36 (layer F.Cu) (tedit 5B9A899E) (tstamp 5B932D8B)
     (at 112 58.75 180)
     (path /5B903484)
     (fp_text reference U1 (at 0.95 0.075 180) (layer F.SilkS)
@@ -636,7 +636,7 @@
       (net 9 +3V3))
   )
 
-  (module OpenOpParts:TestPoint1mm (layer B.Cu) (tedit 5B9BE672) (tstamp 5B9ECA69)
+  (module teensy_beats_parts:TestPoint1mm (layer B.Cu) (tedit 5B9BE672) (tstamp 5B9ECA69)
     (at 134.025 86.075)
     (path /5BA9FA00/5B9F6FA9)
     (zone_connect 2)
@@ -651,7 +651,7 @@
       (net 7 GND) (zone_connect 2))
   )
 
-  (module OpenOpParts:TestPoint1mm (layer B.Cu) (tedit 5B9BE672) (tstamp 5B9E9E25)
+  (module teensy_beats_parts:TestPoint1mm (layer B.Cu) (tedit 5B9BE672) (tstamp 5B9E9E25)
     (at 104.875 48.95)
     (path /5BA9FA00/5BA0F3F6)
     (zone_connect 2)
@@ -666,7 +666,7 @@
       (net 9 +3V3) (zone_connect 2))
   )
 
-  (module OpenOpParts:TestPoint1mm (layer B.Cu) (tedit 5B9BE672) (tstamp 5B9E9E20)
+  (module teensy_beats_parts:TestPoint1mm (layer B.Cu) (tedit 5B9BE672) (tstamp 5B9E9E20)
     (at 132.25 84.075)
     (path /5BA9FA00/5B9F6FA1)
     (zone_connect 2)
@@ -681,7 +681,7 @@
       (net 8 +5V) (zone_connect 2))
   )
 
-  (module OpenOpParts:TestPoint1mm (layer F.Cu) (tedit 5B9BE672) (tstamp 5B9E3902)
+  (module teensy_beats_parts:TestPoint1mm (layer F.Cu) (tedit 5B9BE672) (tstamp 5B9E3902)
     (at 118.875 71.775)
     (path /5BA9FA00/5B9E990E)
     (zone_connect 2)
@@ -696,7 +696,7 @@
       (net 133 PG) (zone_connect 2))
   )
 
-  (module OpenOpParts:TestPoint1mm (layer F.Cu) (tedit 5B9BE672) (tstamp 5B9E38FE)
+  (module teensy_beats_parts:TestPoint1mm (layer F.Cu) (tedit 5B9BE672) (tstamp 5B9E38FE)
     (at 130.6 70.425)
     (path /5BA9FA00/5B9F31DC)
     (zone_connect 2)
@@ -2499,7 +2499,7 @@
     )
   )
 
-  (module OpenOpParts:SJ1-3523N (layer F.Cu) (tedit 5B9A8952) (tstamp 5BA05124)
+  (module teensy_beats_parts:SJ1-3523N (layer F.Cu) (tedit 5B9A8952) (tstamp 5BA05124)
     (at 90 37.29 270)
     (path /5BAC34FB/5BAC3E4F)
     (fp_text reference J2 (at 6.635 2.675) (layer F.SilkS)
@@ -2879,7 +2879,7 @@
     )
   )
 
-  (module OpenOpParts:Bourns-SMD-Encoder (layer F.Cu) (tedit 5B9A8901) (tstamp 5B99229A)
+  (module teensy_beats_parts:Bourns-SMD-Encoder (layer F.Cu) (tedit 5B9A8901) (tstamp 5B99229A)
     (at 73 91 180)
     (path /5BA91469/5BAE2A43)
     (fp_text reference SW1 (at -8.4 -3.475 180) (layer F.SilkS)
@@ -2908,7 +2908,7 @@
     (pad "" np_thru_hole circle (at 0 0 180) (size 2.05 2.05) (drill 2.05) (layers *.Cu *.Mask))
   )
 
-  (module OpenOpParts:Bourns-SMD-Encoder (layer F.Cu) (tedit 5B9A8908) (tstamp 5B99220A)
+  (module teensy_beats_parts:Bourns-SMD-Encoder (layer F.Cu) (tedit 5B9A8908) (tstamp 5B99220A)
     (at 109 91 180)
     (path /5BA91469/5BAE2A35)
     (fp_text reference SW3 (at -8.475 -3.4 180) (layer F.SilkS)
@@ -2937,7 +2937,7 @@
     (pad "" np_thru_hole circle (at 0 0 180) (size 2.05 2.05) (drill 2.05) (layers *.Cu *.Mask))
   )
 
-  (module OpenOpParts:Bourns-SMD-Encoder (layer F.Cu) (tedit 5B9A8905) (tstamp 5B99223A)
+  (module teensy_beats_parts:Bourns-SMD-Encoder (layer F.Cu) (tedit 5B9A8905) (tstamp 5B99223A)
     (at 91 91 180)
     (path /5BA91469/5BAE2A3C)
     (fp_text reference SW2 (at -8.4 -3.4 180) (layer F.SilkS)
@@ -2966,7 +2966,7 @@
     (pad "" np_thru_hole circle (at 0 0 180) (size 2.05 2.05) (drill 2.05) (layers *.Cu *.Mask))
   )
 
-  (module OpenOpParts:Bourns-SMD-Encoder (layer F.Cu) (tedit 5B9A88FB) (tstamp 5B99226A)
+  (module teensy_beats_parts:Bourns-SMD-Encoder (layer F.Cu) (tedit 5B9A88FB) (tstamp 5B99226A)
     (at 127 91 180)
     (path /5BA91469/5BAE2A2E)
     (fp_text reference SW4 (at -8.375 -3.5 180) (layer F.SilkS)
@@ -3434,7 +3434,7 @@
     )
   )
 
-  (module OpenOpParts:AOM-6738P-R (layer F.Cu) (tedit 5B96C614) (tstamp 5B9B28F6)
+  (module teensy_beats_parts:AOM-6738P-R (layer F.Cu) (tedit 5B96C614) (tstamp 5B9B28F6)
     (at 138.1 44.75 90)
     (path /5BAC34FB/5B9CED09)
     (fp_text reference MK1 (at 0.075 0.2 90) (layer F.SilkS)
@@ -3522,7 +3522,7 @@
     )
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985DB3)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985DB3)
     (at 88 114)
     (path /5BA91469/5BBBF040)
     (solder_mask_margin 0.05)
@@ -3554,7 +3554,7 @@
       (net 109 "Net-(LED7-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D9F)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D9F)
     (at 124 103 180)
     (path /5BA91469/5BB9D835)
     (solder_mask_margin 0.05)
@@ -3586,7 +3586,7 @@
       (net 46 "Net-(LED1-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D8B)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D8B)
     (at 112 103 180)
     (path /5BA91469/5BB9BF41)
     (solder_mask_margin 0.05)
@@ -3618,7 +3618,7 @@
       (net 101 "Net-(LED2-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D77)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D77)
     (at 124 136)
     (path /5BA91469/5BBC75A4)
     (solder_mask_margin 0.05)
@@ -3650,7 +3650,7 @@
       (net 42 "Net-(LED11-Pad2)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D63)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D63)
     (at 112 136)
     (path /5BA91469/5BBC75AB)
     (solder_mask_margin 0.05)
@@ -3682,7 +3682,7 @@
       (net 91 "Net-(LED19-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D4F)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D4F)
     (at 100 136)
     (path /5BA91469/5BBC75B2)
     (solder_mask_margin 0.05)
@@ -3714,7 +3714,7 @@
       (net 93 "Net-(LED18-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D3B)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D3B)
     (at 88 136)
     (path /5BA91469/5BBC75B9)
     (solder_mask_margin 0.05)
@@ -3746,7 +3746,7 @@
       (net 95 "Net-(LED17-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D27)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D27)
     (at 76 136)
     (path /5BA91469/5BBC75C0)
     (solder_mask_margin 0.05)
@@ -3778,7 +3778,7 @@
       (net 89 "Net-(LED16-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D13)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985D13)
     (at 76 125 180)
     (path /5BA91469/5BBC2504)
     (solder_mask_margin 0.05)
@@ -3810,7 +3810,7 @@
       (net 99 "Net-(LED15-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985CFF)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985CFF)
     (at 88 125 180)
     (path /5BA91469/5BBC250B)
     (solder_mask_margin 0.05)
@@ -3842,7 +3842,7 @@
       (net 98 "Net-(LED14-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985CEB)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985CEB)
     (at 100 125 180)
     (path /5BA91469/5BBC2512)
     (solder_mask_margin 0.05)
@@ -3874,7 +3874,7 @@
       (net 117 "Net-(LED13-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5BA0D0EF)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5BA0D0EF)
     (at 112 125 180)
     (path /5BA91469/5BBC2519)
     (solder_mask_margin 0.05)
@@ -3906,7 +3906,7 @@
       (net 115 "Net-(LED12-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985CC3)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985CC3)
     (at 124 125 180)
     (path /5BA91469/5BBC2520)
     (solder_mask_margin 0.05)
@@ -3938,7 +3938,7 @@
       (net 113 "Net-(LED11-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985CAF)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985CAF)
     (at 124 114)
     (path /5BA91469/5BBBF02B)
     (solder_mask_margin 0.05)
@@ -3970,7 +3970,7 @@
       (net 39 "Net-(LED1-Pad2)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985C9B)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985C9B)
     (at 112 114)
     (path /5BA91469/5BBBF032)
     (solder_mask_margin 0.05)
@@ -4002,7 +4002,7 @@
       (net 38 "Net-(LED10-Pad2)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985C87)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985C87)
     (at 100 114)
     (path /5BA91469/5BBBF039)
     (solder_mask_margin 0.05)
@@ -4034,7 +4034,7 @@
       (net 111 "Net-(LED8-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985C73)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985C73)
     (at 76 114)
     (path /5BA91469/5BBBF047)
     (solder_mask_margin 0.05)
@@ -4066,7 +4066,7 @@
       (net 107 "Net-(LED6-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985C5F)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985C5F)
     (at 76 103 180)
     (path /5BA91469/5BB9BD6C)
     (solder_mask_margin 0.05)
@@ -4098,7 +4098,7 @@
       (net 131 RGB_CLOCK_HIGH))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985C4B)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985C4B)
     (at 88 103 180)
     (path /5BA91469/5BB9BE03)
     (solder_mask_margin 0.05)
@@ -4130,7 +4130,7 @@
       (net 105 "Net-(LED4-Pad5)"))
   )
 
-  (module OpenOpParts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985C37)
+  (module teensy_beats_parts:APA102C-2020 (layer F.Cu) (tedit 5B969D7A) (tstamp 5B985C37)
     (at 100 103 180)
     (path /5BA91469/5BB9BE98)
     (solder_mask_margin 0.05)
@@ -4342,7 +4342,7 @@
     )
   )
 
-  (module OpenOpParts:RV100F-30-4K1-B50K (layer F.Cu) (tedit 5B95A958) (tstamp 5B969FBF)
+  (module teensy_beats_parts:RV100F-30-4K1-B50K (layer F.Cu) (tedit 5B95A958) (tstamp 5B969FBF)
     (at 75 42.25)
     (path /5BAC34FB/5B9FDDBA)
     (fp_text reference RV1 (at 0.06 4.8) (layer F.SilkS)

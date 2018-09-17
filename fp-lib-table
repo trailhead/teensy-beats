@@ -2,6 +2,6 @@
   (lib (name teensy)(type KiCad)(uri /Users/chris/Downloads/teensy.pretty-master)(options "")(descr ""))
   (lib (name WS2812-2020)(type Legacy)(uri /Users/chris/Downloads/WS2812-2020/WS2812-2020.mod)(options "")(descr ""))
   (lib (name Connector_Audio)(type KiCad)(uri /Users/chris/Documents/kicad-footprints/Connector_Audio.pretty)(options "")(descr ""))
-  (lib (name OpenOpParts)(type KiCad)(uri ${KIPRJMOD}/OpenOpParts.pretty)(options "")(descr ""))
+  (lib (name teensy_beats_parts)(type KiCad)(uri ${KIPRJMOD}/teensy_beats_parts.pretty)(options "")(descr ""))
   (lib (name shield)(type KiCad)(uri /Users/chris/Downloads/shield)(options "")(descr ""))
 )

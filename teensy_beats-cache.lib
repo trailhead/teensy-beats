@@ -410,11 +410,11 @@ X VCC 8 0 500 150 D 50 50 1 1 W
 ENDDRAW
 ENDDEF
 #
-# OpenOpParts:AP7313R-1.8V
+# teensy_beats_parts:AP7313R-1.8V
 #
-DEF OpenOpParts:AP7313R-1.8V U 0 40 Y Y 1 F N
+DEF teensy_beats_parts:AP7313R-1.8V U 0 40 Y Y 1 F N
 F0 "U" -150 150 50 H V C CNN
-F1 "OpenOpParts:AP7313R-1.8V" 300 150 50 H V C CNN
+F1 "teensy_beats_parts:AP7313R-1.8V" 300 150 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -425,11 +425,11 @@ X VI 3 300 0 100 L 50 50 1 1 W
 ENDDRAW
 ENDDEF
 #
-# OpenOpParts:APA102C
+# teensy_beats_parts:APA102C
 #
-DEF OpenOpParts:APA102C U 0 40 Y Y 1 F N
+DEF teensy_beats_parts:APA102C U 0 40 Y Y 1 F N
 F0 "U" 0 -250 50 H V C CNN
-F1 "OpenOpParts:APA102C" 0 250 50 H V C CNN
+F1 "teensy_beats_parts:APA102C" 0 250 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -443,11 +443,11 @@ X GND 6 400 100 200 L 50 50 1 1 W
 ENDDRAW
 ENDDEF
 #
-# OpenOpParts:SJ1-3523N
+# teensy_beats_parts:SJ1-3523N
 #
-DEF OpenOpParts:SJ1-3523N U 0 40 Y Y 1 F N
+DEF teensy_beats_parts:SJ1-3523N U 0 40 Y Y 1 F N
 F0 "U" 0 350 50 H V C CNN
-F1 "OpenOpParts:SJ1-3523N" 0 250 50 H V C CNN
+F1 "teensy_beats_parts:SJ1-3523N" 0 250 50 H V C CNN
 F2 "" 0 350 50 H I C CNN
 F3 "" 0 350 50 H I C CNN
 DRAW
@@ -462,11 +462,11 @@ X ~ 3 250 0 100 L 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# OpenOpParts:TEENSY3.6-OpenOp
+# teensy_beats_parts:TEENSY3.6-teensy_beats
 #
-DEF OpenOpParts:TEENSY3.6-OpenOp U 0 40 Y Y 1 F N
+DEF teensy_beats_parts:TEENSY3.6-teensy_beats U 0 40 Y Y 1 F N
 F0 "U" -700 2300 50 H V C CNN
-F1 "OpenOpParts:TEENSY3.6-OpenOp" 450 2300 50 H V C CNN
+F1 "teensy_beats_parts:TEENSY3.6-teensy_beats" 450 2300 50 H V C CNN
 F2 "" -700 2300 50 H I C CNN
 F3 "" -700 2300 50 H I C CNN
 DRAW
@@ -525,11 +525,11 @@ X 7_RX3_mosi0_scl0 9 -1000 1300 200 R 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
-# OpenOpParts:TFT_TOUCH_SPI
+# teensy_beats_parts:TFT_TOUCH_SPI
 #
-DEF OpenOpParts:TFT_TOUCH_SPI U 0 40 Y Y 1 F N
+DEF teensy_beats_parts:TFT_TOUCH_SPI U 0 40 Y Y 1 F N
 F0 "U" 0 -850 50 H V C CNN
-F1 "OpenOpParts:TFT_TOUCH_SPI" -50 800 50 H V C CNN
+F1 "teensy_beats_parts:TFT_TOUCH_SPI" -50 800 50 H V C CNN
 F2 "" 0 -850 50 H I C CNN
 F3 "" 0 -850 50 H I C CNN
 DRAW

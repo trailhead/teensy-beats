@@ -1,5 +1,5 @@
 EESchema Schematic File Version 4
-LIBS:Open Op-cache
+LIBS:teensy_beats-cache
 EELAYER 26 0
 EELAYER END
 $Descr A4 11693 8268
@@ -97,12 +97,12 @@ Wire Wire Line
 Wire Wire Line
 	6350 4700 7150 4700
 $Comp
-L OpenOpParts:TFT_TOUCH_SPI U3
+L teensy_beats_parts:TFT_TOUCH_SPI U3
 U 1 1 5BA764CE
 P 9600 4800
 F 0 "U3" H 9681 5715 50  0000 C CNN
 F 1 "TFT_TOUCH_SPI" H 9681 5624 50  0000 C CNN
-F 2 "OpenOpParts:2.4inTFT_TOUCH_SPI" H 9600 3950 50  0001 C CNN
+F 2 "teensy_beats_parts:2.4inTFT_TOUCH_SPI" H 9600 3950 50  0001 C CNN
 F 3 "" H 9600 3950 50  0001 C CNN
 	1    9600 4800
 	1    0    0    -1  
@@ -320,12 +320,12 @@ KEYPAD_R4
 Text GLabel 3300 3050 0    50   Input ~ 0
 VOLUME
 $Comp
-L OpenOpParts:TEENSY3.6-OpenOp U1
+L teensy_beats_parts:TEENSY3.6-teensy_beats U1
 U 1 1 5B903484
 P 4300 2850
 F 0 "U1" H 4300 5237 60  0000 C CNN
 F 1 "Teensy3.6" H 4300 5131 60  0000 C CNN
-F 2 "OpenOpParts:Teensy35_36" H 4300 2850 60  0001 C CNN
+F 2 "teensy_beats_parts:Teensy35_36" H 4300 2850 60  0001 C CNN
 F 3 "" H 4300 2850 60  0000 C CNN
 	1    4300 2850
 	1    0    0    -1  

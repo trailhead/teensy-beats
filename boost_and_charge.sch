@@ -940,7 +940,7 @@ U 1 1 5B9E990E
 P 4900 6100
 F 0 "TP1" V 5095 6174 50  0000 C CNN
 F 1 "TestPoint" V 5004 6174 50  0000 C CNN
-F 2 "OpenOpParts:TestPoint1mm" H 5100 6100 50  0001 C CNN
+F 2 "teensy_beats_parts:TestPoint1mm" H 5100 6100 50  0001 C CNN
 F 3 "~" H 5100 6100 50  0001 C CNN
 	1    4900 6100
 	0    -1   -1   0   
@@ -955,7 +955,7 @@ U 1 1 5B9F31DC
 P 4900 6300
 F 0 "TP2" V 5095 6374 50  0000 C CNN
 F 1 "TestPoint" V 5004 6374 50  0000 C CNN
-F 2 "OpenOpParts:TestPoint1mm" H 5100 6300 50  0001 C CNN
+F 2 "teensy_beats_parts:TestPoint1mm" H 5100 6300 50  0001 C CNN
 F 3 "~" H 5100 6300 50  0001 C CNN
 	1    4900 6300
 	0    -1   -1   0   
@@ -968,7 +968,7 @@ U 1 1 5B9F6FA1
 P 4900 6550
 F 0 "TP3" V 5095 6624 50  0000 C CNN
 F 1 "TestPoint" V 5004 6624 50  0000 C CNN
-F 2 "OpenOpParts:TestPoint1mm" H 5100 6550 50  0001 C CNN
+F 2 "teensy_beats_parts:TestPoint1mm" H 5100 6550 50  0001 C CNN
 F 3 "~" H 5100 6550 50  0001 C CNN
 	1    4900 6550
 	0    -1   -1   0   
@@ -979,7 +979,7 @@ U 1 1 5B9F6FA9
 P 4900 6950
 F 0 "TP5" V 5095 7024 50  0000 C CNN
 F 1 "TestPoint" V 5004 7024 50  0000 C CNN
-F 2 "OpenOpParts:TestPoint1mm" H 5100 6950 50  0001 C CNN
+F 2 "teensy_beats_parts:TestPoint1mm" H 5100 6950 50  0001 C CNN
 F 3 "~" H 5100 6950 50  0001 C CNN
 	1    4900 6950
 	0    -1   -1   0   
@@ -1012,7 +1012,7 @@ U 1 1 5BA0F3F6
 P 4900 6750
 F 0 "TP4" V 5095 6824 50  0000 C CNN
 F 1 "TestPoint" V 5004 6824 50  0000 C CNN
-F 2 "OpenOpParts:TestPoint1mm" H 5100 6750 50  0001 C CNN
+F 2 "teensy_beats_parts:TestPoint1mm" H 5100 6750 50  0001 C CNN
 F 3 "~" H 5100 6750 50  0001 C CNN
 	1    4900 6750
 	0    -1   -1   0   

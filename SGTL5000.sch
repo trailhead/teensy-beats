@@ -47,14 +47,14 @@ Wire Wire Line
 Wire Wire Line
 	5450 4850 5450 4950
 $Comp
-L OpenOpParts:SJ1-3523N J?
+L teensy_beats_parts:SJ1-3523N J?
 U 1 1 5BAC3E4F
 P 7050 3850
 AR Path="/5BAC3E4F" Ref="J?"  Part="1" 
 AR Path="/5BAC34FB/5BAC3E4F" Ref="J2"  Part="1" 
 F 0 "J2" H 6867 3779 50  0000 R CNN
 F 1 "AudioJack3_Ground" H 6867 3870 50  0000 R CNN
-F 2 "OpenOpParts:SJ1-3523N" H 7050 3850 50  0001 C CNN
+F 2 "teensy_beats_parts:SJ1-3523N" H 7050 3850 50  0001 C CNN
 F 3 "~" H 7050 3850 50  0001 C CNN
 	1    7050 3850
 	-1   0    0    1   
@@ -373,7 +373,7 @@ F 3 "" H 5450 5000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L OpenOpParts:AP7313R-1.8V U?
+L teensy_beats_parts:AP7313R-1.8V U?
 U 1 1 5BAC54DA
 P 2250 2100
 AR Path="/5BAC54DA" Ref="U?"  Part="1" 
@@ -500,7 +500,7 @@ U 1 1 5B9FDDBA
 P 8550 2150
 F 0 "RV1" V 8345 2150 50  0000 C CNN
 F 1 "50K" V 8436 2150 50  0000 C CNN
-F 2 "OpenOpParts:RV100F-30-4K1-B50K" H 8550 2150 50  0001 C CNN
+F 2 "teensy_beats_parts:RV100F-30-4K1-B50K" H 8550 2150 50  0001 C CNN
 F 3 "~" H 8550 2150 50  0001 C CNN
 	1    8550 2150
 	0    1    1    0   
@@ -561,7 +561,7 @@ U 1 1 5B9CED09
 P 7000 4600
 F 0 "MK1" H 7130 4646 50  0000 L CNN
 F 1 "Microphone_Condenser" H 7130 4555 50  0000 L CNN
-F 2 "OpenOpParts:AOM-6738P-R" V 7000 4700 50  0001 C CNN
+F 2 "teensy_beats_parts:AOM-6738P-R" V 7000 4700 50  0001 C CNN
 F 3 "~" V 7000 4700 50  0001 C CNN
 	1    7000 4600
 	1    0    0    -1  

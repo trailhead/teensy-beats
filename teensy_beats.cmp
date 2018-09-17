@@ -285,7 +285,7 @@ TimeStamp = 5BA05392
 Path = /5BA764CE
 Reference = U3;
 ValeurCmp = TFT_TOUCH_SPI;
-IdModule  = OpenOpParts:2.4inTFT_TOUCH_SPI;
+IdModule  = teensy_beats_parts:2.4inTFT_TOUCH_SPI;
 EndCmp
 
 BeginCmp
@@ -293,7 +293,7 @@ TimeStamp = 5BA05124
 Path = /5BAC34FB/5BAC3E4F
 Reference = J2;
 ValeurCmp = AudioJack3_Ground;
-IdModule  = OpenOpParts:SJ1-3523N;
+IdModule  = teensy_beats_parts:SJ1-3523N;
 EndCmp
 
 BeginCmp
@@ -373,7 +373,7 @@ TimeStamp = 5B99229A
 Path = /5BA91469/5BAE2A43
 Reference = SW1;
 ValeurCmp = Rotary_Encoder_Switch;
-IdModule  = OpenOpParts:Bourns-SMD-Encoder;
+IdModule  = teensy_beats_parts:Bourns-SMD-Encoder;
 EndCmp
 
 BeginCmp
@@ -381,7 +381,7 @@ TimeStamp = 5B99220A
 Path = /5BA91469/5BAE2A35
 Reference = SW3;
 ValeurCmp = Rotary_Encoder_Switch;
-IdModule  = OpenOpParts:Bourns-SMD-Encoder;
+IdModule  = teensy_beats_parts:Bourns-SMD-Encoder;
 EndCmp
 
 BeginCmp
@@ -389,7 +389,7 @@ TimeStamp = 5B99223A
 Path = /5BA91469/5BAE2A3C
 Reference = SW2;
 ValeurCmp = Rotary_Encoder_Switch;
-IdModule  = OpenOpParts:Bourns-SMD-Encoder;
+IdModule  = teensy_beats_parts:Bourns-SMD-Encoder;
 EndCmp
 
 BeginCmp
@@ -397,7 +397,7 @@ TimeStamp = 5B99226A
 Path = /5BA91469/5BAE2A2E
 Reference = SW4;
 ValeurCmp = Rotary_Encoder_Switch;
-IdModule  = OpenOpParts:Bourns-SMD-Encoder;
+IdModule  = teensy_beats_parts:Bourns-SMD-Encoder;
 EndCmp
 
 BeginCmp
@@ -413,7 +413,7 @@ TimeStamp = 5B932D8B
 Path = /5B903484
 Reference = U1;
 ValeurCmp = Teensy3.6;
-IdModule  = OpenOpParts:Teensy35_36;
+IdModule  = teensy_beats_parts:Teensy35_36;
 EndCmp
 
 BeginCmp
@@ -501,7 +501,7 @@ TimeStamp = 5B9B28F6
 Path = /5BAC34FB/5B9CED09
 Reference = MK1;
 ValeurCmp = Microphone_Condenser;
-IdModule  = OpenOpParts:AOM-6738P-R;
+IdModule  = teensy_beats_parts:AOM-6738P-R;
 EndCmp
 
 BeginCmp
@@ -525,7 +525,7 @@ TimeStamp = 5B985DB3
 Path = /5BA91469/5BBBF040
 Reference = LED7;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -533,7 +533,7 @@ TimeStamp = 5B985D9F
 Path = /5BA91469/5BB9D835
 Reference = LED1;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -541,7 +541,7 @@ TimeStamp = 5B985D8B
 Path = /5BA91469/5BB9BF41
 Reference = LED2;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -549,7 +549,7 @@ TimeStamp = 5B985D77
 Path = /5BA91469/5BBC75A4
 Reference = LED20;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -557,7 +557,7 @@ TimeStamp = 5B985D63
 Path = /5BA91469/5BBC75AB
 Reference = LED19;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -565,7 +565,7 @@ TimeStamp = 5B985D4F
 Path = /5BA91469/5BBC75B2
 Reference = LED18;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -573,7 +573,7 @@ TimeStamp = 5B985D3B
 Path = /5BA91469/5BBC75B9
 Reference = LED17;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -581,7 +581,7 @@ TimeStamp = 5B985D27
 Path = /5BA91469/5BBC75C0
 Reference = LED16;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -589,7 +589,7 @@ TimeStamp = 5B985D13
 Path = /5BA91469/5BBC2504
 Reference = LED15;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -597,7 +597,7 @@ TimeStamp = 5B985CFF
 Path = /5BA91469/5BBC250B
 Reference = LED14;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -605,7 +605,7 @@ TimeStamp = 5B985CEB
 Path = /5BA91469/5BBC2512
 Reference = LED13;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -613,7 +613,7 @@ TimeStamp = 5B985CD7
 Path = /5BA91469/5BBC2519
 Reference = LED12;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -621,7 +621,7 @@ TimeStamp = 5B985CC3
 Path = /5BA91469/5BBC2520
 Reference = LED11;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -629,7 +629,7 @@ TimeStamp = 5B985CAF
 Path = /5BA91469/5BBBF02B
 Reference = LED10;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -637,7 +637,7 @@ TimeStamp = 5B985C9B
 Path = /5BA91469/5BBBF032
 Reference = LED9;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -645,7 +645,7 @@ TimeStamp = 5B985C87
 Path = /5BA91469/5BBBF039
 Reference = LED8;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -653,7 +653,7 @@ TimeStamp = 5B985C73
 Path = /5BA91469/5BBBF047
 Reference = LED6;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -661,7 +661,7 @@ TimeStamp = 5B985C5F
 Path = /5BA91469/5BB9BD6C
 Reference = LED5;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -669,7 +669,7 @@ TimeStamp = 5B985C4B
 Path = /5BA91469/5BB9BE03
 Reference = LED4;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -677,7 +677,7 @@ TimeStamp = 5B985C37
 Path = /5BA91469/5BB9BE98
 Reference = LED3;
 ValeurCmp = APA102C;
-IdModule  = OpenOpParts:APA102C-2020;
+IdModule  = teensy_beats_parts:APA102C-2020;
 EndCmp
 
 BeginCmp
@@ -725,7 +725,7 @@ TimeStamp = 5B969FBF
 Path = /5BAC34FB/5B9FDDBA
 Reference = RV1;
 ValeurCmp = 50K;
-IdModule  = OpenOpParts:RV100F-30-4K1-B50K;
+IdModule  = teensy_beats_parts:RV100F-30-4K1-B50K;
 EndCmp
 
 BeginCmp
