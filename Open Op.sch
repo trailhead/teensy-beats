@@ -364,9 +364,9 @@ Text GLabel 3300 1150 0    50   Input ~ 0
 E4A
 Text GLabel 3300 1050 0    50   Input ~ 0
 E4B
-Text GLabel 3300 4850 0    50   Input ~ 0
+Text GLabel 3300 950  0    50   Input ~ 0
 RGB_DATA
-Text GLabel 3300 4950 0    50   Input ~ 0
+Text GLabel 3300 850  0    50   Input ~ 0
 RGB_CLOCK
 Wire Wire Line
 	2650 4550 3300 4550
@@ -376,15 +376,15 @@ Wire Wire Line
 	5300 3950 5900 3950
 Wire Wire Line
 	5300 4050 6150 4050
-Text GLabel 3300 1250 0    50   Input ~ 0
+Text GLabel 3300 4950 0    50   Input ~ 0
 BATT_STAT2
-Text GLabel 3300 950  0    50   Input ~ 0
+Text GLabel 3300 4850 0    50   Input ~ 0
 BATT_STAT1
 Wire Wire Line
 	2650 750  3300 750 
 Wire Wire Line
 	2650 2150 3300 2150
-Text GLabel 3300 850  0    50   Input ~ 0
+Text GLabel 3300 1250 0    50   Input ~ 0
 REC_LED
 $Comp
 L Connector:Conn_01x04_Male J3
@@ -402,10 +402,10 @@ SDA
 Text GLabel 6700 1900 2    50   Input ~ 0
 SCL
 $Comp
-L power:+3V3 #PWR?
+L power:+3V3 #PWR0154
 U 1 1 5BA1378F
 P 6700 1700
-F 0 "#PWR?" H 6700 1550 50  0001 C CNN
+F 0 "#PWR0154" H 6700 1550 50  0001 C CNN
 F 1 "+3V3" H 6715 1873 50  0000 C CNN
 F 2 "" H 6700 1700 50  0001 C CNN
 F 3 "" H 6700 1700 50  0001 C CNN
@@ -413,10 +413,10 @@ F 3 "" H 6700 1700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0155
 U 1 1 5BA13809
 P 6700 2000
-F 0 "#PWR?" H 6700 1750 50  0001 C CNN
+F 0 "#PWR0155" H 6700 1750 50  0001 C CNN
 F 1 "GND" H 6705 1827 50  0000 C CNN
 F 2 "" H 6700 2000 50  0001 C CNN
 F 3 "" H 6700 2000 50  0001 C CNN
