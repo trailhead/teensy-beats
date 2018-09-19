@@ -6,8 +6,8 @@
 #include <SPI.h>
 #include <SD.h>
 #include <SerialFlash.h>
-#include "ILI9341_t3.h"
-#include "font_Arial.h"
+#include "tft.h"
+#include "ui_item.h"
 
 #define NUMROWS       4
 #define NUMCOLS       4
@@ -18,8 +18,8 @@
 #define VBAT_PIN      A22
 #define VBAT_DIVIDER  2.0f
 
-#define BATT_STAT1_PIN  1
-#define BATT_STAT2_PIN  4
+#define BATT_STAT1_PIN  15
+#define BATT_STAT2_PIN  16
 
 // Time interval for serial status in ms
 #define STATUS_INTERVAL 1000
@@ -31,6 +31,7 @@
 #define CLOCKPIN   1
 Adafruit_DotStar strip = Adafruit_DotStar(NUMPIXELS, DATAPIN, CLOCKPIN, DOTSTAR_BRG);
 
+ILI9341_t3 tft = ILI9341_t3(TFT_CS, TFT_DC, TFT_RST, TFT_MOSI, TFT_SCLK, TFT_MISO);
 
 uint8_t rows[NUMROWS] = { 28, 29, 30, 31 };
 uint8_t cols[NUMCOLS] = { 35, 36, 37, 38 };
@@ -100,7 +101,7 @@ Button but1 = Button(3, 100, true, false);
 long enc1_pos    = 0;
 long enc2_pos    = 0;
 
-float bpm        = 200.0;
+float bpm        = 50.0;
 int tick         = 0;
 int current_inst = 0;
 long next_tick   = 0;
@@ -110,18 +111,8 @@ float vbat = 0;
 bool bat_stat1 = LOW;
 bool bat_stat2 = LOW;
 
-
-// For optimized ILI9341_t3 library
-#define TFT_DC      20
-#define TFT_CS      21
-#define TFT_RST    255  // 255 = unused, connect to 3.3V
-#define TFT_MOSI     7
-#define TFT_SCLK    14
-#define TFT_MISO    12
-ILI9341_t3 tft = ILI9341_t3(TFT_CS, TFT_DC, TFT_RST, TFT_MOSI, TFT_SCLK, TFT_MISO);
-
-#define TFT_INTERVAL 100
-
+HomeScreen h = HomeScreen();
+UiScreen *pscreen = &h;
 void setup() {
   blank();
 
@@ -165,7 +156,7 @@ void setup() {
   env3.releaseNoteOn(0);
 
   sgtl5000_1.enable();
-  sgtl5000_1.volume(0.5);
+  sgtl5000_1.volume(0.25);
 
   AudioInterrupts();
 
@@ -174,13 +165,11 @@ void setup() {
   tft.fillScreen(ILI9341_BLACK);
 
   tft.setTextColor(ILI9341_WHITE, ILI9341_BLACK);
-  tft.setFont(Arial_12);
+  tft.setFont(Arial_9);
 
-  draw_note_menu();
-  draw_bpm();
   draw_channel();
 
-  next_tick = millis() + (long)(60000.0f / bpm);  
+  next_tick = millis() + (long)(60000.0f / bpm / 4.0f);  
   next_tft = 0;
 
   notes[0][0][0] = 1;
@@ -206,7 +195,7 @@ void loop() {
 
   ms = millis();
   if (playing && ms >= next_tick) {
-    next_tick = ms + (long)(60000.0f / bpm);
+    next_tick = ms + (long)(60000.0f / bpm / 4.0f);
 
     leds[tick / NUMCOLS][tick % NUMCOLS] = false;
 
@@ -226,7 +215,7 @@ void loop() {
         }
         if (inst == 2) {
           triangle1.begin(1.0f, tones[notes[inst][tick / NUMCOLS][tick % NUMCOLS]], WAVEFORM_TRIANGLE);
-          env2.decay((60000.0f / bpm));
+          env2.decay((60000.0f / bpm / 4.0f));
           env2.noteOn();
         }
         if (inst == 3) {
@@ -264,8 +253,8 @@ void loop() {
   if (enc1_new < enc1_pos) {
     if (playing) {
       bpm -= 5;
-      if (bpm < 60) {
-        bpm = 60;
+      if (bpm < 10) {
+        bpm = 10;
       }
     } else {
       tick--;      
@@ -273,12 +262,11 @@ void loop() {
         tick = NUMTICKS - 1;
       }
     }
-    draw_bpm();
   } else if (enc1_new > enc1_pos) {
     if (playing) {
       bpm += 5;
-      if (bpm > 550) {
-        bpm = 550;
+      if (bpm > 150) {
+        bpm = 150;
       }
     } else {
       tick++;
@@ -286,7 +274,6 @@ void loop() {
         tick = 0;
       }
     }
-    draw_bpm();
   }
   enc1_pos = enc1_new;
 
@@ -325,7 +312,7 @@ void loop() {
   if (ms >= next_tft) {
     next_tft = ms + TFT_INTERVAL;
 
-    draw_note_grid(notes[current_inst], 30, 30);
+    pscreen->Draw();
   }
 
   for(y = 0; y < NUMROWS; y++) {
