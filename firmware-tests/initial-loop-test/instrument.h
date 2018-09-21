@@ -1,6 +1,7 @@
 #ifndef __INSTRUMENT_H__
 #define __INSTRUMENT_H__
 
+#include "beats.h"
 #include <Audio.h>
 
 class Instrument {

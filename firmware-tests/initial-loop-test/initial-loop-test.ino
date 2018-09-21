@@ -7,29 +7,10 @@
 #include <SD.h>
 #include <SerialFlash.h>
 #include <XPT2046_Touchscreen.h>
-#include "tft.h"
 #include "ui_item.h"
 #include "instrument.h"
+#include "beats.h"
 
-#define NUMROWS       4
-#define NUMCOLS       4
-#define NUMINST       4
-#define NUMTICKS  (NUMROWS*NUMCOLS)
-#define BUTTON_DEBOUNCE 250
-#define VBAT_PIN      A22
-#define VBAT_DIVIDER  2.0f
-
-#define BATT_STAT1_PIN  15
-#define BATT_STAT2_PIN  16
-
-// Time interval for serial status in ms
-#define STATUS_INTERVAL 1000
-
-#define NUMPIXELS 1 // Number of LEDs in strip
-
-// Here's how to control the LEDs from any two pins:
-#define DATAPIN    0
-#define CLOCKPIN   1
 Adafruit_DotStar strip = Adafruit_DotStar(NUMPIXELS, DATAPIN, CLOCKPIN, DOTSTAR_BRG);
 
 ILI9341_t3 tft = ILI9341_t3(TFT_CS, TFT_DC, TFT_RST, TFT_MOSI, TFT_SCLK, TFT_MISO);
@@ -72,29 +53,23 @@ uint16_t tones[] = {
   880
 };
 
-#include <Audio.h>
-#include <Wire.h>
-#include <SPI.h>
-#include <SD.h>
-#include <SerialFlash.h>
-
 // GUItool: begin automatically generated code
 AudioSynthWaveform       waveform2;      //xy=74,765
 AudioSynthWaveform       waveform1;      //xy=77,679
-AudioSynthWaveform       waveform3;      //xy=84,831
-AudioSynthWaveform       waveform4;      //xy=107,896
+//AudioSynthWaveform       waveform3;      //xy=84,831
+//AudioSynthWaveform       waveform4;      //xy=107,896
 AudioSynthNoiseWhite     noise1;         //xy=207,341
 AudioEffectEnvelope      env_w_1;      //xy=233,685
 AudioEffectEnvelope      env_w_2;      //xy=235,771
-AudioEffectEnvelope      env_w_3;      //xy=243,833
-AudioEffectEnvelope      env_w_4;      //xy=268,885
+//AudioEffectEnvelope      env_w_3;      //xy=243,833
+//AudioEffectEnvelope      env_w_4;      //xy=268,885
 AudioSynthKarplusStrong  string1;        //xy=366,988
 AudioEffectReverb        reverb_w_1;        //xy=386,681
 AudioFilterStateVariable filter_n_1;        //xy=394,352
 AudioEffectReverb        reverb_w_2;        //xy=395,755
-AudioEffectReverb        reverb_w_3;        //xy=406,808
+//AudioEffectReverb        reverb_w_3;        //xy=406,808
 AudioSynthSimpleDrum     drum1;          //xy=409,574
-AudioEffectReverb        reverb_w_4;        //xy=443,860
+//AudioEffectReverb        reverb_w_4;        //xy=443,860
 AudioEffectEnvelope      env_st_1;      //xy=527,962
 AudioEffectEnvelope      env_n_1;      //xy=556,391
 AudioMixer4              mixer_w;         //xy=611,699
@@ -102,20 +77,20 @@ AudioMixer4              mixer1;         //xy=847,588
 AudioOutputI2S           i2s1;           //xy=1001,613
 AudioConnection          patchCord1(waveform2, env_w_2);
 AudioConnection          patchCord2(waveform1, env_w_1);
-AudioConnection          patchCord3(waveform3, env_w_3);
-AudioConnection          patchCord4(waveform4, env_w_4);
+//AudioConnection          patchCord3(waveform3, env_w_3);
+//AudioConnection          patchCord4(waveform4, env_w_4);
 AudioConnection          patchCord5(noise1, 0, filter_n_1, 0);
 AudioConnection          patchCord6(env_w_1, reverb_w_1);
 AudioConnection          patchCord7(env_w_2, reverb_w_2);
-AudioConnection          patchCord8(env_w_3, reverb_w_3);
-AudioConnection          patchCord9(env_w_4, reverb_w_4);
+//AudioConnection          patchCord8(env_w_3, reverb_w_3);
+//AudioConnection          patchCord9(env_w_4, reverb_w_4);
 AudioConnection          patchCord10(string1, env_st_1);
 AudioConnection          patchCord11(reverb_w_1, 0, mixer_w, 0);
 AudioConnection          patchCord12(filter_n_1, 2, env_n_1, 0);
 AudioConnection          patchCord13(reverb_w_2, 0, mixer_w, 1);
-AudioConnection          patchCord14(reverb_w_3, 0, mixer_w, 2);
+//AudioConnection          patchCord14(reverb_w_3, 0, mixer_w, 2);
 AudioConnection          patchCord15(drum1, 0, mixer1, 1);
-AudioConnection          patchCord16(reverb_w_4, 0, mixer_w, 3);
+//AudioConnection          patchCord16(reverb_w_4, 0, mixer_w, 3);
 AudioConnection          patchCord17(env_st_1, 0, mixer1, 3);
 AudioConnection          patchCord18(env_n_1, 0, mixer1, 0);
 AudioConnection          patchCord19(mixer_w, 0, mixer1, 2);
@@ -126,8 +101,8 @@ AudioControlSGTL5000     sgtl5000_1;     //xy=911,298
 
 WaveformInstrument wave1  = WaveformInstrument("Waveform1", &waveform1, &env_w_1, &reverb_w_1, &mixer_w, 0);
 WaveformInstrument wave2  = WaveformInstrument("Waveform2", &waveform2, &env_w_2, &reverb_w_2, &mixer_w, 1);
-WaveformInstrument wave3  = WaveformInstrument("Waveform3", &waveform3, &env_w_3, &reverb_w_3, &mixer_w, 2);
-WaveformInstrument wave4  = WaveformInstrument("Waveform4", &waveform4, &env_w_4, &reverb_w_4, &mixer_w, 3);
+//WaveformInstrument wave3  = WaveformInstrument("Waveform3", &waveform3, &env_w_3, &reverb_w_3, &mixer_w, 2);
+//WaveformInstrument wave4  = WaveformInstrument("Waveform4", &waveform4, &env_w_4, &reverb_w_4, &mixer_w, 3);
 NoiseInstrument    nois1 = NoiseInstrument("Noise1", &noise1, &filter_n_1, &env_n_1, &mixer1, 1);
 
 Encoder enc1(25, 26);
@@ -149,10 +124,10 @@ bool bat_stat1 = LOW;
 bool bat_stat2 = LOW;
 boolean wastouched = false;
 
-HomeScreen h = HomeScreen();
-UiScreen *p_screen = &h;
-
 void setup() {
+
+  Serial.begin(115200);
+  
   blank();
 
   pinMode(BATT_STAT1_PIN, INPUT_PULLUP);
@@ -225,8 +200,6 @@ void setup() {
   strip.begin(); // Initialize pins for output
   strip.setPixelColor(0, 0x0000FF); // 'On' pixel at head
   strip.show();  // Turn all LEDs off ASAP
-  
-  Serial.begin(115200);
 }
 
 void loop() {
@@ -281,7 +254,7 @@ void loop() {
       Serial.print(p.x);
       Serial.print(", ");
       Serial.println(p.y);
-      p_screen->OnTouch(p.x, p.y);
+      current_screen->OnTouch(p.x, p.y);
 
     }
   }
@@ -368,7 +341,7 @@ void loop() {
   if (ms >= next_tft) {
     next_tft = ms + TFT_INTERVAL;
 
-    p_screen->Draw();
+    current_screen->Draw();
   }
 
   for(y = 0; y < NUMROWS; y++) {

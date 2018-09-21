@@ -1,4 +1,4 @@
-#include "tft.h"
+#include "beats.h"
 
 void draw_voltage(void) {
   tft.fillRect(240, 0, 100, 15, ILI9341_BLACK);
