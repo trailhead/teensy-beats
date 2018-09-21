@@ -6,15 +6,16 @@
 #include <SPI.h>
 #include <SD.h>
 #include <SerialFlash.h>
+#include <XPT2046_Touchscreen.h>
 #include "tft.h"
 #include "ui_item.h"
+#include "instrument.h"
 
 #define NUMROWS       4
 #define NUMCOLS       4
 #define NUMINST       4
 #define NUMTICKS  (NUMROWS*NUMCOLS)
 #define BUTTON_DEBOUNCE 250
-#define DEFAULT_NOTE  1
 #define VBAT_PIN      A22
 #define VBAT_DIVIDER  2.0f
 
@@ -32,6 +33,8 @@
 Adafruit_DotStar strip = Adafruit_DotStar(NUMPIXELS, DATAPIN, CLOCKPIN, DOTSTAR_BRG);
 
 ILI9341_t3 tft = ILI9341_t3(TFT_CS, TFT_DC, TFT_RST, TFT_MOSI, TFT_SCLK, TFT_MISO);
+
+XPT2046_Touchscreen ts(TOUCH_CS);
 
 uint8_t rows[NUMROWS] = { 28, 29, 30, 31 };
 uint8_t cols[NUMCOLS] = { 35, 36, 37, 38 };
@@ -69,29 +72,63 @@ uint16_t tones[] = {
   880
 };
 
+#include <Audio.h>
+#include <Wire.h>
+#include <SPI.h>
+#include <SD.h>
+#include <SerialFlash.h>
+
 // GUItool: begin automatically generated code
-AudioSynthNoiseWhite     noise1;         //xy=376,500
-AudioSynthSimpleDrum     drum1;          //xy=404,587
-AudioSynthKarplusStrong  string1;        //xy=410,745
-AudioSynthWaveform       triangle1;      //xy=415,655
-AudioFilterStateVariable filter1;        //xy=536,537
-AudioEffectEnvelope      env3;      //xy=613,720
-AudioEffectEnvelope      env2;      //xy=634,651
-AudioEffectEnvelope      env1;      //xy=696,551
+AudioSynthWaveform       waveform2;      //xy=74,765
+AudioSynthWaveform       waveform1;      //xy=77,679
+AudioSynthWaveform       waveform3;      //xy=84,831
+AudioSynthWaveform       waveform4;      //xy=107,896
+AudioSynthNoiseWhite     noise1;         //xy=207,341
+AudioEffectEnvelope      env_w_1;      //xy=233,685
+AudioEffectEnvelope      env_w_2;      //xy=235,771
+AudioEffectEnvelope      env_w_3;      //xy=243,833
+AudioEffectEnvelope      env_w_4;      //xy=268,885
+AudioSynthKarplusStrong  string1;        //xy=366,988
+AudioEffectReverb        reverb_w_1;        //xy=386,681
+AudioFilterStateVariable filter_n_1;        //xy=394,352
+AudioEffectReverb        reverb_w_2;        //xy=395,755
+AudioEffectReverb        reverb_w_3;        //xy=406,808
+AudioSynthSimpleDrum     drum1;          //xy=409,574
+AudioEffectReverb        reverb_w_4;        //xy=443,860
+AudioEffectEnvelope      env_st_1;      //xy=527,962
+AudioEffectEnvelope      env_n_1;      //xy=556,391
+AudioMixer4              mixer_w;         //xy=611,699
 AudioMixer4              mixer1;         //xy=847,588
 AudioOutputI2S           i2s1;           //xy=1001,613
-AudioConnection          patchCord1(noise1, 0, filter1, 0);
-AudioConnection          patchCord2(drum1, 0, mixer1, 1);
-AudioConnection          patchCord3(string1, env3);
-AudioConnection          patchCord4(triangle1, env2);
-AudioConnection          patchCord5(filter1, 2, env1, 0);
-AudioConnection          patchCord6(env3, 0, mixer1, 3);
-AudioConnection          patchCord7(env2, 0, mixer1, 2);
-AudioConnection          patchCord8(env1, 0, mixer1, 0);
-AudioConnection          patchCord9(mixer1, 0, i2s1, 1);
-AudioConnection          patchCord10(mixer1, 0, i2s1, 0);
+AudioConnection          patchCord1(waveform2, env_w_2);
+AudioConnection          patchCord2(waveform1, env_w_1);
+AudioConnection          patchCord3(waveform3, env_w_3);
+AudioConnection          patchCord4(waveform4, env_w_4);
+AudioConnection          patchCord5(noise1, 0, filter_n_1, 0);
+AudioConnection          patchCord6(env_w_1, reverb_w_1);
+AudioConnection          patchCord7(env_w_2, reverb_w_2);
+AudioConnection          patchCord8(env_w_3, reverb_w_3);
+AudioConnection          patchCord9(env_w_4, reverb_w_4);
+AudioConnection          patchCord10(string1, env_st_1);
+AudioConnection          patchCord11(reverb_w_1, 0, mixer_w, 0);
+AudioConnection          patchCord12(filter_n_1, 2, env_n_1, 0);
+AudioConnection          patchCord13(reverb_w_2, 0, mixer_w, 1);
+AudioConnection          patchCord14(reverb_w_3, 0, mixer_w, 2);
+AudioConnection          patchCord15(drum1, 0, mixer1, 1);
+AudioConnection          patchCord16(reverb_w_4, 0, mixer_w, 3);
+AudioConnection          patchCord17(env_st_1, 0, mixer1, 3);
+AudioConnection          patchCord18(env_n_1, 0, mixer1, 0);
+AudioConnection          patchCord19(mixer_w, 0, mixer1, 2);
+AudioConnection          patchCord20(mixer1, 0, i2s1, 1);
+AudioConnection          patchCord21(mixer1, 0, i2s1, 0);
 AudioControlSGTL5000     sgtl5000_1;     //xy=911,298
 // GUItool: end automatically generated code
+
+WaveformInstrument wave1  = WaveformInstrument("Waveform1", &waveform1, &env_w_1, &reverb_w_1, &mixer_w, 0);
+WaveformInstrument wave2  = WaveformInstrument("Waveform2", &waveform2, &env_w_2, &reverb_w_2, &mixer_w, 1);
+WaveformInstrument wave3  = WaveformInstrument("Waveform3", &waveform3, &env_w_3, &reverb_w_3, &mixer_w, 2);
+WaveformInstrument wave4  = WaveformInstrument("Waveform4", &waveform4, &env_w_4, &reverb_w_4, &mixer_w, 3);
+NoiseInstrument    nois1 = NoiseInstrument("Noise1", &noise1, &filter_n_1, &env_n_1, &mixer1, 1);
 
 Encoder enc1(25, 26);
 Encoder enc2(24, 10);
@@ -101,7 +138,7 @@ Button but1 = Button(3, 100, true, false);
 long enc1_pos    = 0;
 long enc2_pos    = 0;
 
-float bpm        = 50.0;
+float bpm        = 80.0;
 int tick         = 0;
 int current_inst = 0;
 long next_tick   = 0;
@@ -110,9 +147,11 @@ bool playing     = true;
 float vbat = 0;
 bool bat_stat1 = LOW;
 bool bat_stat2 = LOW;
+boolean wastouched = false;
 
 HomeScreen h = HomeScreen();
-UiScreen *pscreen = &h;
+UiScreen *p_screen = &h;
+
 void setup() {
   blank();
 
@@ -130,30 +169,33 @@ void setup() {
 
   noise1.amplitude(1.0f);
 
-  env1.hold(0);
-  env1.attack(0);
-  env1.hold(0);
-  env1.decay(100);
-  env1.sustain(0.0f);
-  env1.release(1); 
-  env1.releaseNoteOn(0);
-  filter1.frequency(8000);
+  // Noise
+  env_n_1.hold(0);
+  env_n_1.attack(0);
+  env_n_1.hold(0);
+  env_n_1.decay(100);
+  env_n_1.sustain(0.0f);
+  env_n_1.release(1); 
+  env_n_1.releaseNoteOn(0);
+  filter_n_1.frequency(8000);
 
-  env2.hold(0);
-  env2.attack(10);
-  env2.hold(0);
-  env2.decay(1000);
-  env2.sustain(0.0f);
-  env2.release(1); 
-  env2.releaseNoteOn(0);
-  
-  env3.hold(0);
-  env3.attack(20);
-  env3.hold(0);
-  env3.decay(1000);
-  env3.sustain(0.0f);
-  env3.release(1); 
-  env3.releaseNoteOn(0);
+  // Triangle
+  env_w_1.hold(0);
+  env_w_1.attack(10);
+  env_w_1.hold(0);
+  env_w_1.decay(1000);
+  env_w_1.sustain(0.0f);
+  env_w_1.release(1); 
+  env_w_1.releaseNoteOn(0);
+
+  // String
+  env_st_1.hold(0);
+  env_st_1.attack(20);
+  env_st_1.hold(0);
+  env_st_1.decay(1000);
+  env_st_1.sustain(0.0f);
+  env_st_1.release(1); 
+  env_st_1.releaseNoteOn(0);
 
   sgtl5000_1.enable();
   sgtl5000_1.volume(0.25);
@@ -163,11 +205,11 @@ void setup() {
   tft.begin();
   tft.setRotation( 3 );
   tft.fillScreen(ILI9341_BLACK);
-
   tft.setTextColor(ILI9341_WHITE, ILI9341_BLACK);
   tft.setFont(Arial_9);
 
-  draw_channel();
+  ts.begin();
+  ts.setRotation(3);
 
   next_tick = millis() + (long)(60000.0f / bpm / 4.0f);  
   next_tft = 0;
@@ -207,20 +249,20 @@ void loop() {
     for (inst = 0; inst < NUMINST; inst++) {
       if (notes[inst][tick / NUMCOLS][tick % NUMCOLS]) {
         if (inst == 0) {
-          env1.noteOn();
+          env_n_1.noteOn();
         }
         if (inst == 1) {
           drum1.frequency(50);
           drum1.noteOn();
         }
         if (inst == 2) {
-          triangle1.begin(1.0f, tones[notes[inst][tick / NUMCOLS][tick % NUMCOLS]], WAVEFORM_TRIANGLE);
-          env2.decay((60000.0f / bpm / 4.0f));
-          env2.noteOn();
+          waveform1.begin(1.0f, tones[notes[inst][tick / NUMCOLS][tick % NUMCOLS]], WAVEFORM_TRIANGLE);
+          env_w_1.decay((60000.0f / bpm / 4.0f));
+          env_w_1.noteOn();
         }
         if (inst == 3) {
           string1.noteOn(261.6f, 1.0f);
-          env3.noteOn();
+          env_st_1.noteOn();
         }
         if (inst == current_inst) {
           leds[tick / NUMCOLS][tick % NUMCOLS] = true;
@@ -228,6 +270,22 @@ void loop() {
       }
     }
   }
+
+  boolean istouched = ts.touched();
+  if (istouched) {
+    TS_Point p = ts.getPoint();
+    p.x = map(p.x, 290, 3700, 320, 0);
+    p.y = map(p.y, 480, 3700, 240, 0);
+    if (!wastouched) {
+      Serial.print("New touch: ");
+      Serial.print(p.x);
+      Serial.print(", ");
+      Serial.println(p.y);
+      p_screen->OnTouch(p.x, p.y);
+
+    }
+  }
+  wastouched = istouched;
 
   but1.read();
   if (but1.wasPressed()) {
@@ -253,8 +311,8 @@ void loop() {
   if (enc1_new < enc1_pos) {
     if (playing) {
       bpm -= 5;
-      if (bpm < 10) {
-        bpm = 10;
+      if (bpm < 50) {
+        bpm = 50;
       }
     } else {
       tick--;      
@@ -265,8 +323,8 @@ void loop() {
   } else if (enc1_new > enc1_pos) {
     if (playing) {
       bpm += 5;
-      if (bpm > 150) {
-        bpm = 150;
+      if (bpm > 250) {
+        bpm = 250;
       }
     } else {
       tick++;
@@ -284,7 +342,6 @@ void loop() {
       if (current_inst < 0) {
         current_inst = NUMINST - 1;
       }
-      draw_channel();
     } else {
       notes[current_inst][tick / NUMCOLS][tick % NUMCOLS]--;      
       if (notes[current_inst][tick / NUMCOLS][tick % NUMCOLS] <= 0) {
@@ -298,7 +355,6 @@ void loop() {
       if (current_inst >= NUMINST) {
         current_inst = 0;
       }
-      draw_channel();
     } else {
       notes[current_inst][tick / NUMCOLS][tick % NUMCOLS]++;      
       if (notes[current_inst][tick / NUMCOLS][tick % NUMCOLS] >= sizeof(tones) / sizeof(uint16_t)) {
@@ -312,7 +368,7 @@ void loop() {
   if (ms >= next_tft) {
     next_tft = ms + TFT_INTERVAL;
 
-    pscreen->Draw();
+    p_screen->Draw();
   }
 
   for(y = 0; y < NUMROWS; y++) {

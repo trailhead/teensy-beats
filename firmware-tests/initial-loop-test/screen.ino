@@ -1,12 +1,5 @@
 #include "tft.h"
 
-void draw_channel(void) {
-  tft.fillRect(0, 15, 100, 15, ILI9341_BLACK);
-  tft.setCursor(0,15);
-  tft.print("channel ");
-  tft.print(current_inst);
-}
-
 void draw_voltage(void) {
   tft.fillRect(240, 0, 100, 15, ILI9341_BLACK);
   tft.setCursor(240,0);

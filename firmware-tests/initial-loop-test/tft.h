@@ -13,6 +13,8 @@
 #define TFT_SCLK    14
 #define TFT_MISO    12
 
+#define TOUCH_CS    33
+
 extern ILI9341_t3 tft;
 
 #define TFT_INTERVAL 100
