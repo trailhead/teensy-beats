@@ -120,8 +120,17 @@ long next_tick   = 0;
 long next_tft    = 0;
 bool playing     = true;
 float vbat = 0;
-bool bat_stat1 = LOW;
-bool bat_stat2 = LOW;
+volatile boolean batt_stat1 = LOW;
+volatile boolean batt_stat2 = LOW;
+
+volatile unsigned long batt_stat1_last_change = 0;
+volatile unsigned long batt_stat2_last_change = 0;
+volatile uint16_t      batt_stat1_hiz_count = 0;
+volatile uint16_t      batt_stat2_hiz_count = 0;
+
+volatile boolean       batt_stat1_hiz = false;
+volatile boolean       batt_stat2_hiz = false;
+
 boolean wastouched = false;
 
 void setup() {
@@ -131,7 +140,10 @@ void setup() {
   blank();
 
   pinMode(BATT_STAT1_PIN, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(BATT_STAT1_PIN), batt_stat1_changed, CHANGE);
+  
   pinMode(BATT_STAT2_PIN, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(BATT_STAT2_PIN), batt_stat2_changed, CHANGE);
   
   enc1.write(0);
   enc2.write(0);
@@ -202,6 +214,34 @@ void setup() {
   strip.show();  // Turn all LEDs off ASAP
 }
 
+void batt_stat1_changed(void) {
+  if (millis() < batt_stat1_last_change + HIZ_TIMEOUT) {
+    batt_stat1_hiz_count++;
+  } else {
+    batt_stat1_hiz_count = 0;
+  }
+  if (batt_stat1_hiz_count > HIZ_COUNT) {
+    batt_stat1_hiz = true;
+  } else {
+    batt_stat1_hiz = false;
+  }
+  batt_stat1_last_change = millis();
+}
+
+void batt_stat2_changed(void) {
+  if (millis() < batt_stat2_last_change + HIZ_TIMEOUT) {
+    batt_stat2_hiz_count++;
+  } else {
+    batt_stat2_hiz_count = 0;
+  }
+  if (batt_stat2_hiz_count > HIZ_COUNT) {
+    batt_stat2_hiz = true;
+  } else {
+    batt_stat2_hiz = false;
+  }
+  batt_stat2_last_change = millis();
+}
+
 void loop() {
   int x, y, inst;
   long ms = 0;
@@ -263,17 +303,7 @@ void loop() {
   but1.read();
   if (but1.wasPressed()) {
     playing = !playing;
-    if (playing) {
-      tft.fillRect(100, 0, 100, 15, ILI9341_BLACK);
-      tft.setCursor(100,0);
-      tft.print("Playing");
-      draw_freq();
-    } else {
-      tft.fillRect(100, 0, 100, 15, ILI9341_BLACK);
-      tft.setCursor(100,0);
-      tft.print("Paused");
-      draw_freq();
-    }
+    current_screen->Draw(true);
   }
 
   int knob = analogRead(A1);
@@ -377,11 +407,21 @@ void loop() {
  
   if (millis() >= last_status + STATUS_INTERVAL) {
 
-    bat_stat1 = digitalRead(BATT_STAT1_PIN);
-    bat_stat2 = digitalRead(BATT_STAT2_PIN);
-
     vbat = (float)analogRead(VBAT_PIN) / 1024.0f * 3.3f * VBAT_DIVIDER;
-    if (bat_stat2 == LOW) {
+
+    batt_stat1 = digitalRead(BATT_STAT1_PIN);
+    batt_stat2 = digitalRead(BATT_STAT2_PIN);
+
+    if (millis() > batt_stat1_last_change + HIZ_TIMEOUT) {
+      batt_stat1_hiz_count = 0;
+      batt_stat1_hiz = false; 
+    }
+    if (millis() > batt_stat2_last_change + HIZ_TIMEOUT) {
+      batt_stat2_hiz_count = 0;
+      batt_stat2_hiz = false; 
+    }
+
+    if (batt_stat1 == LOW && batt_stat2 == HIGH) {
       Serial.println("Charging");
     } else {
       Serial.print("Battery voltage: ");
@@ -456,5 +496,10 @@ void scan_buttons()
     pinMode(rows[y], INPUT_PULLUP);
     //delay(1);
   } 
+}
+
+void play_note(uint16_t which_note) {
+  Serial.print("Playing note");
+  Serial.println(which_note);
 }
 

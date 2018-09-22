@@ -20,6 +20,8 @@ public:
   uint16_t border_color_ = ILI9341_WHITE;
   boolean border_ = false;
   uint16_t text_color_ = 0;
+  void (*callback_)(uint16_t);
+  uint16_t callback_param_ = 0;
   char *text_;
 
   boolean dirty_ = true;
@@ -27,7 +29,7 @@ public:
   void (*on_touch_func_)(void);
 
 public:
-  UiItem(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t radius, uint16_t bg_color, uint16_t text_color, char *text) :
+  UiItem(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t radius, uint16_t bg_color, uint16_t text_color, char *text, void (*cb)(uint16_t) = nullptr, uint16_t cb_param = 0) :
   x_(x),
   y_(y),
   w_(w),
@@ -35,7 +37,9 @@ public:
   radius_(radius),
   bg_color_(bg_color),
   text_color_(text_color),
-  text_(text) {
+  text_(text),
+  callback_(cb),
+  callback_param_(cb_param) {
   }
 
   virtual bool HitTest(uint16_t touch_x, uint16_t touch_y);
@@ -64,8 +68,8 @@ class PlayButton : public UiItem {
 private:
 
 public:
-  PlayButton(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t radius, uint16_t bg_color, uint16_t text_color, char *text) :
-  UiItem(x, y, w, h, radius, bg_color, text_color, text) {    
+  PlayButton(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t radius, uint16_t bg_color, uint16_t text_color, char *text, void (*cb)(uint16_t) = nullptr, uint16_t cb_param = 0) :
+  UiItem(x, y, w, h, radius, bg_color, text_color, text, cb, cb_param) {    
   }
   void Draw(boolean force_refresh = false);
 };
@@ -144,18 +148,18 @@ protected:
   const uint16_t last_row_y_ = BUTTON_HEIGHT * 4 + STATUS_HEIGHT + BUTTON_SPACING / 2;
 
   UiItem key_buttons_[12] = {
-    UiItem(0, 0, keys_width_, 40, 4, ILI9341_WHITE, 0, "1"),
-    UiItem(42, 0, keys_width_, 40, 4, ILI9341_WHITE, 0, "2"),
-    UiItem(84, 0, keys_width_, 40, 4, ILI9341_WHITE, 0, "3"),
-    UiItem(126, 0, keys_width_, 40, 4, ILI9341_WHITE, 0, "4"),
-    UiItem(0, 42, keys_width_, 40, 4, ILI9341_WHITE, 0, "5"),
-    UiItem(42, 42, keys_width_, 40, 4, ILI9341_WHITE, 0, "6"),
-    UiItem(84, 42, keys_width_, 40, 4, ILI9341_WHITE, 0, "7"),
-    UiItem(1, black_keys_y_, keys_width_, black_keys_height_, 4, ILI9341_BLACK, 0, "8"),
-    UiItem(1, black_keys_y_, keys_width_, black_keys_height_, 4, ILI9341_BLACK, 0, "9"),
-    UiItem(1, black_keys_y_, keys_width_, black_keys_height_, 4, ILI9341_BLACK, 0, "10"),
-    UiItem(1, black_keys_y_, keys_width_, black_keys_height_, 4, ILI9341_BLACK, 0, "11"),
-    UiItem(1, black_keys_y_, keys_width_, black_keys_height_, 4, ILI9341_BLACK, 0, "12")
+    UiItem(0, 0, keys_width_, 40, 4, ILI9341_WHITE, 0, "1", &play_note, 0),
+    UiItem(42, 0, keys_width_, 40, 4, ILI9341_WHITE, 0, "2", &play_note, 2),
+    UiItem(84, 0, keys_width_, 40, 4, ILI9341_WHITE, 0, "3", &play_note, 4),
+    UiItem(126, 0, keys_width_, 40, 4, ILI9341_WHITE, 0, "4", &play_note, 5),
+    UiItem(0, 42, keys_width_, 40, 4, ILI9341_WHITE, 0, "5", &play_note, 7),
+    UiItem(42, 42, keys_width_, 40, 4, ILI9341_WHITE, 0, "6", &play_note, 9),
+    UiItem(84, 42, keys_width_, 40, 4, ILI9341_WHITE, 0, "7", &play_note, 11),
+    UiItem(1, black_keys_y_, keys_width_, black_keys_height_, 4, ILI9341_BLACK, 0, "8", &play_note, 1),
+    UiItem(1, black_keys_y_, keys_width_, black_keys_height_, 4, ILI9341_BLACK, 0, "9", &play_note, 3),
+    UiItem(1, black_keys_y_, keys_width_, black_keys_height_, 4, ILI9341_BLACK, 0, "10", &play_note, 6),
+    UiItem(1, black_keys_y_, keys_width_, black_keys_height_, 4, ILI9341_BLACK, 0, "11", &play_note, 8),
+    UiItem(1, black_keys_y_, keys_width_, black_keys_height_, 4, ILI9341_BLACK, 0, "12", &play_note, 10)
   };
   
   UiItem home_button_ = UiItem(1, last_row_y_, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Home");

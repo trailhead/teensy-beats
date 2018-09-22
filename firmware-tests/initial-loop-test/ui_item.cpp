@@ -7,6 +7,9 @@ UiScreen *current_screen = &h;
 
 bool UiItem::HitTest(uint16_t touch_x, uint16_t touch_y) {
   if (touch_x >= x_ && touch_x <= x_ + w_ && touch_y >= y_ && touch_y <= y_ + h_) {
+    if (callback_ != nullptr) {
+      (callback_)(callback_param_);
+    }
     return true;
   }
   return false;
@@ -121,7 +124,7 @@ void HomeScreen::Draw(boolean force_refresh) {
 }
 
 bool HomeScreen::OnTouch(uint16_t touch_x, uint16_t touch_y) {
-  for (unsigned i = 0; i < sizeof(p_children_) / sizeof(UiItem*); i++) {
+  for (int i = 0; i < sizeof(p_children_) / sizeof(UiItem*); i++) {
     if (p_children_[i]->HitTest(touch_x, touch_y) == true) {
       if (i < 16) {
         if (notes[current_inst][i / NUMROWS][i % NUMCOLS] > 0) {
@@ -173,26 +176,20 @@ KeysScreen::KeysScreen(void) {
 };
 
 void KeysScreen::Draw(boolean force_refresh) {
-  for (unsigned i = 0; i < sizeof(p_children_) / sizeof(UiItem*); i++) {
+  for (int i = 0; i < sizeof(p_children_) / sizeof(UiItem*); i++) {
     p_children_[i]->Draw(force_refresh);
   }
 }
 
 bool KeysScreen::OnTouch(uint16_t touch_x, uint16_t touch_y) {
-  Serial.println("Testing Keys");
   // Iterate the keys in reverse order to get top-most touches first.
-  for (unsigned i = 11; i > 0; i--) {
-    Serial.print(i);
+  for (int i = 11; i >= 0; --i) {
     if (p_children_[i]->HitTest(touch_x, touch_y) == true) {
       // Return on the first successful hit.
       return true;
     }
   }
-  Serial.println(" - Done.");
-
-  Serial.println("Testing home button");
   if (home_button_.HitTest(touch_x, touch_y) == true) {
-    Serial.println("Home press");
     tft.fillScreen(ILI9341_BLACK);
     h.Draw(true);
     current_screen = &h;
