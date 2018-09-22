@@ -248,6 +248,16 @@ void loop() {
   static long cycles = 0;
   static long last_status = 0;
 
+  if ((millis() / 3000) % 2) {
+    reverb_w_1.setBypass(false);
+    reverb_w_2.setBypass(false);
+    reverb_w_1.reverbTime(5);
+  } else {
+    reverb_w_1.setBypass(true);
+    reverb_w_2.setBypass(true);
+  }
+
+
   ms = millis();
   if (playing && ms >= next_tick) {
     next_tick = ms + (long)(60000.0f / bpm / 4.0f);
@@ -406,6 +416,8 @@ void loop() {
   scan_buttons();
  
   if (millis() >= last_status + STATUS_INTERVAL) {
+
+    Serial.println(reverb_w_1.isActive());
 
     vbat = (float)analogRead(VBAT_PIN) / 1024.0f * 3.3f * VBAT_DIVIDER;
 
