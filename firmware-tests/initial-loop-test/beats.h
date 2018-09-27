@@ -24,11 +24,14 @@
 // Time interval for serial status in ms
 #define STATUS_INTERVAL 2000
 
-#define NUMPIXELS 1 // Number of LEDs in strip
+#define NUMPIXELS 20 // Number of LEDs in strip
 
 // RGB LED pins
-#define DATAPIN    0
-#define CLOCKPIN   1
+#define DATAPIN       1
+#define CLOCKPIN      0
+
+#define NUM_LED_COLS  5
+#define NUM_LED_ROWS  4
 
 // For optimized ILI9341_t3 library
 #define TFT_DC      20
@@ -53,7 +56,7 @@ extern boolean playing;
 extern float bpm;
 extern uint16_t tones[];
 
-#define DEFAULT_NOTE  1
+#define DEFAULT_NOTE  12
 
 void play_note(uint16_t which_note);
 

@@ -25,20 +25,19 @@ long buttons[NUMROWS][NUMCOLS];
 uint8_t notes[NUMINST][NUMCOLS][NUMROWS];
 
 uint16_t tones[] = {
-  440 / 2,
-  466 / 2,
-  494 / 2,
-  523 / 2,
-  554 / 2,
-  587 / 2,
-  622 / 2,
-  659 / 2,
-  698 / 2,
-  740 / 2,
-  784 / 2,
-  831 / 2,
-  880 / 2,
-  440,
+  440 / 2, // 0
+  466 / 2, // 1
+  494 / 2, // 2
+  523 / 2, // 3
+  554 / 2, // 4
+  587 / 2, // 5
+  622 / 2, // 6
+  659 / 2, // 7
+  698 / 2, // 8
+  740 / 2, // 9
+  784 / 2, // 10
+  831 / 2, // 11
+  440,     // 12
   466,
   494,
   523,
@@ -50,7 +49,19 @@ uint16_t tones[] = {
   740,
   784,
   831,
-  880
+  880,
+  466 * 2,
+  494 * 2,
+  523 * 2,
+  554 * 2,
+  587 * 2,
+  622 * 2,
+  659 * 2,
+  698 * 2,
+  740 * 2,
+  784 * 2,
+  831 * 2,
+  880 * 2
 };
 
 // GUItool: begin automatically generated code
@@ -105,8 +116,8 @@ WaveformInstrument wave2  = WaveformInstrument("Waveform2", &waveform2, &env_w_2
 //WaveformInstrument wave4  = WaveformInstrument("Waveform4", &waveform4, &env_w_4, &reverb_w_4, &mixer_w, 3);
 NoiseInstrument    nois1 = NoiseInstrument("Noise1", &noise1, &filter_n_1, &env_n_1, &mixer1, 1);
 
-Encoder enc1(25, 26);
-Encoder enc2(24, 10);
+Encoder enc1(26, 25);
+Encoder enc2(34, 17);
 
 Button but1 = Button(3, 100, true, false);
 
@@ -175,6 +186,9 @@ void setup() {
   env_w_1.release(1); 
   env_w_1.releaseNoteOn(0);
 
+  reverb_w_1.setBypass(true);
+  reverb_w_2.setBypass(true);
+
   // String
   env_st_1.hold(0);
   env_st_1.attack(20);
@@ -209,8 +223,10 @@ void setup() {
 
   vbat = (float)analogRead(VBAT_PIN) / 1024.0f * 3.3f * VBAT_DIVIDER;
 
-  strip.begin(); // Initialize pins for output
-  strip.setPixelColor(0, 0x0000FF); // 'On' pixel at head
+  strip.begin();
+  for (int x = 0; x < NUMPIXELS; x++) {
+    strip.setPixelColor(x, 0x000000);
+  }
   strip.show();  // Turn all LEDs off ASAP
 }
 
@@ -247,16 +263,6 @@ void loop() {
   long ms = 0;
   static long cycles = 0;
   static long last_status = 0;
-
-  if ((millis() / 3000) % 2) {
-    reverb_w_1.setBypass(false);
-    reverb_w_2.setBypass(false);
-    reverb_w_1.reverbTime(5);
-  } else {
-    reverb_w_1.setBypass(true);
-    reverb_w_2.setBypass(true);
-  }
-
 
   ms = millis();
   if (playing && ms >= next_tick) {
@@ -316,8 +322,8 @@ void loop() {
     current_screen->Draw(true);
   }
 
-  int knob = analogRead(A1);
-  float vol = (float)knob / 1280.0f;
+  int knob = analogRead(A13 );
+  float vol = 1.0f - (float)knob / 1280.0f - 0.25f;
   sgtl5000_1.volume(vol);
   
   long enc1_new = enc1.read() / 4;
@@ -385,34 +391,20 @@ void loop() {
   }
 
   for(y = 0; y < NUMROWS; y++) {
-    pinMode(rows[y], INPUT);
-  }
-  for(x = 0; x < NUMCOLS; x++) {
-    pinMode(cols[x], INPUT);
-  }
-
-  delay(1);
-
-  for(y = 0; y < NUMROWS; y++) {
     for(x = 0; x < NUMCOLS; x++) {
-      pinMode(rows[y], OUTPUT);
-      digitalWrite(rows[y], HIGH);
-      pinMode(cols[x], OUTPUT);
-
       if (leds[y][x] == true) {
-        digitalWrite(cols[x], LOW);
+        strip.setPixelColor(row_col_to_led(y, x), 0x080000);
       } else {
-        digitalWrite(cols[x], HIGH);
+        if (tick == y * NUMCOLS + x) {
+          strip.setPixelColor(row_col_to_led(y, x), 0x000008);
+        } else {
+          strip.setPixelColor(row_col_to_led(y, x), 0x000000);
+        }
       }
-
-      delayMicroseconds(16);
-      delayMicroseconds(16);
-      delayMicroseconds(16);
-
-      pinMode(rows[y], INPUT);
-      pinMode(cols[x], INPUT);
     }
   }
+  strip.show();
+  
   scan_buttons();
  
   if (millis() >= last_status + STATUS_INTERVAL) {
@@ -510,8 +502,33 @@ void scan_buttons()
   } 
 }
 
-void play_note(uint16_t which_note) {
+uint16_t tick_to_led(uint16_t t) {
+  uint16_t row = t / NUMCOLS;
+  uint16_t col = t % NUMCOLS;
+  if (row % 2) {
+    return row * NUM_LED_COLS + NUM_LED_COLS - col;
+  } else {
+    return row * NUM_LED_COLS + col;
+  }
+}
+
+uint16_t row_col_to_led(uint16_t row, uint16_t col) {
+  if (row % 2) {
+    return row * NUM_LED_COLS + NUM_LED_COLS - 1 - col;
+    return 0;
+  } else {
+    return row * NUM_LED_COLS + col;
+  }
+}
+
+void play_note(uint16_t which_note) {  
   Serial.print("Playing note");
   Serial.println(which_note);
+
+  waveform1.begin(1.0f, tones[which_note + 12], WAVEFORM_TRIANGLE);
+  env_w_1.decay((60000.0f / bpm / 4.0f));
+  env_w_1.noteOn();
+
+  notes[2][tick / NUMCOLS][tick % NUMCOLS] = which_note + 12;
 }
 
