@@ -24,97 +24,75 @@ bool leds[NUMROWS][NUMCOLS];
 long buttons[NUMROWS][NUMCOLS];
 uint8_t notes[NUMINST][NUMCOLS][NUMROWS];
 
-uint16_t tones[] = {
-  440 / 2, // 0
-  466 / 2, // 1
-  494 / 2, // 2
-  523 / 2, // 3
-  554 / 2, // 4
-  587 / 2, // 5
-  622 / 2, // 6
-  659 / 2, // 7
-  698 / 2, // 8
-  740 / 2, // 9
-  784 / 2, // 10
-  831 / 2, // 11
-  440,     // 12
-  466,
-  494,
-  523,
-  554,
-  587,
-  622,
-  659,
-  698,
-  740,
-  784,
-  831,
-  880,
-  466 * 2,
-  494 * 2,
-  523 * 2,
-  554 * 2,
-  587 * 2,
-  622 * 2,
-  659 * 2,
-  698 * 2,
-  740 * 2,
-  784 * 2,
-  831 * 2,
-  880 * 2
+// Frequencies of a scale in octave 1
+float tones[] = {
+  32.70320,   // C1
+  34.64783,
+  36.70810,
+  38.89087,
+  41.20344,
+  43.65353,
+  46.24930,
+  51.91309,
+  55.00000,
+  58.27047,
+  61.73541
 };
 
 // GUItool: begin automatically generated code
-AudioSynthWaveform       waveform2;      //xy=74,765
-AudioSynthWaveform       waveform1;      //xy=77,679
-//AudioSynthWaveform       waveform3;      //xy=84,831
-//AudioSynthWaveform       waveform4;      //xy=107,896
-AudioSynthNoiseWhite     noise1;         //xy=207,341
-AudioEffectEnvelope      env_w_1;      //xy=233,685
-AudioEffectEnvelope      env_w_2;      //xy=235,771
-//AudioEffectEnvelope      env_w_3;      //xy=243,833
-//AudioEffectEnvelope      env_w_4;      //xy=268,885
-AudioSynthKarplusStrong  string1;        //xy=366,988
-AudioEffectReverb        reverb_w_1;        //xy=386,681
-AudioFilterStateVariable filter_n_1;        //xy=394,352
-AudioEffectReverb        reverb_w_2;        //xy=395,755
-//AudioEffectReverb        reverb_w_3;        //xy=406,808
-AudioSynthSimpleDrum     drum1;          //xy=409,574
-//AudioEffectReverb        reverb_w_4;        //xy=443,860
-AudioEffectEnvelope      env_st_1;      //xy=527,962
-AudioEffectEnvelope      env_n_1;      //xy=556,391
-AudioMixer4              mixer_w;         //xy=611,699
-AudioMixer4              mixer1;         //xy=847,588
-AudioOutputI2S           i2s1;           //xy=1001,613
-AudioConnection          patchCord1(waveform2, env_w_2);
-AudioConnection          patchCord2(waveform1, env_w_1);
-//AudioConnection          patchCord3(waveform3, env_w_3);
-//AudioConnection          patchCord4(waveform4, env_w_4);
-AudioConnection          patchCord5(noise1, 0, filter_n_1, 0);
-AudioConnection          patchCord6(env_w_1, reverb_w_1);
-AudioConnection          patchCord7(env_w_2, reverb_w_2);
-//AudioConnection          patchCord8(env_w_3, reverb_w_3);
-//AudioConnection          patchCord9(env_w_4, reverb_w_4);
-AudioConnection          patchCord10(string1, env_st_1);
-AudioConnection          patchCord11(reverb_w_1, 0, mixer_w, 0);
-AudioConnection          patchCord12(filter_n_1, 2, env_n_1, 0);
-AudioConnection          patchCord13(reverb_w_2, 0, mixer_w, 1);
-//AudioConnection          patchCord14(reverb_w_3, 0, mixer_w, 2);
-AudioConnection          patchCord15(drum1, 0, mixer1, 1);
-//AudioConnection          patchCord16(reverb_w_4, 0, mixer_w, 3);
-AudioConnection          patchCord17(env_st_1, 0, mixer1, 3);
-AudioConnection          patchCord18(env_n_1, 0, mixer1, 0);
-AudioConnection          patchCord19(mixer_w, 0, mixer1, 2);
-AudioConnection          patchCord20(mixer1, 0, i2s1, 1);
-AudioConnection          patchCord21(mixer1, 0, i2s1, 0);
+AudioSynthWaveform       waveform2;      //xy=354.8333396911621,846.1666584014893
+AudioSynthWaveform       waveform3;      //xy=354.8333396911621,904.6111555099487
+AudioSynthWaveform       waveform1;      //xy=359.2777976989746,782.7222785949707
+AudioSynthWaveform       waveform4;      //xy=359.2777900695801,961.3888683319092
+AudioPlaySdWav           sdWav4;     //xy=524.5833511352539,617.0833683013916
+AudioPlaySdWav           sdWav1;     //xy=525.2500152587891,471.75001525878906
+AudioPlaySdWav           sdWav2;     //xy=525.2500152587891,520.7500152587891
+AudioPlaySdWav           sdWav3;     //xy=525.2500152587891,566.7500152587891
+AudioEffectEnvelope      env_w1;      //xy=565.8888854980469,774.8611755371094
+AudioEffectEnvelope      env_w2;      //xy=566.0000114440918,840.9721965789795
+AudioEffectEnvelope      env_w4;      //xy=567.7777786254883,974.8610982894897
+AudioEffectEnvelope      env_w3;      //xy=568.3333282470703,907.5277557373047
+AudioMixer4              mix_sdwav_r;         //xy=748.5833511352539,569.3055782318115
+AudioMixer4              mix_sdwav_l;         //xy=749.8055381774902,495.0833568572998
+AudioMixer4              mixer_w_l;         //xy=806.4443130493164,832.2220659255981
+AudioMixer4              mixer_w_r;         //xy=813.3333104451498,942.2222157584296
+AudioMixer4              mix_out_l;         //xy=1011.4443969726562,595.7777404785156
+AudioMixer4              mix_out_r;         //xy=1012.888843536377,678.3333406448364
+AudioOutputUSB           usb1;           //xy=1189.8888854980469,573.1110877990723
+AudioOutputI2S           i2s1;           //xy=1190.0000076293945,691.2222490310669
+AudioConnection          patchCord1(waveform2, env_w2);
+AudioConnection          patchCord2(waveform3, env_w3);
+AudioConnection          patchCord3(waveform1, env_w1);
+AudioConnection          patchCord4(waveform4, env_w4);
+AudioConnection          patchCord5(sdWav4, 0, mix_sdwav_l, 3);
+AudioConnection          patchCord6(sdWav4, 1, mix_sdwav_r, 3);
+AudioConnection          patchCord7(sdWav1, 0, mix_sdwav_l, 0);
+AudioConnection          patchCord8(sdWav1, 1, mix_sdwav_r, 0);
+AudioConnection          patchCord9(sdWav2, 0, mix_sdwav_l, 1);
+AudioConnection          patchCord10(sdWav2, 1, mix_sdwav_r, 1);
+AudioConnection          patchCord11(sdWav3, 0, mix_sdwav_l, 2);
+AudioConnection          patchCord12(sdWav3, 1, mix_sdwav_r, 2);
+AudioConnection          patchCord13(env_w1, 0, mixer_w_l, 0);
+AudioConnection          patchCord14(env_w1, 0, mixer_w_r, 0);
+AudioConnection          patchCord15(env_w2, 0, mixer_w_l, 1);
+AudioConnection          patchCord16(env_w2, 0, mixer_w_r, 1);
+AudioConnection          patchCord17(env_w4, 0, mixer_w_l, 3);
+AudioConnection          patchCord18(env_w4, 0, mixer_w_r, 3);
+AudioConnection          patchCord19(env_w3, 0, mixer_w_l, 2);
+AudioConnection          patchCord20(env_w3, 0, mixer_w_r, 2);
+AudioConnection          patchCord21(mix_sdwav_r, 0, mix_out_r, 0);
+AudioConnection          patchCord22(mix_sdwav_l, 0, mix_out_l, 0);
+AudioConnection          patchCord23(mixer_w_l, 0, mix_out_l, 1);
+AudioConnection          patchCord24(mixer_w_r, 0, mix_out_r, 1);
+AudioConnection          patchCord25(mix_out_l, 0, usb1, 0);
+AudioConnection          patchCord26(mix_out_l, 0, i2s1, 0);
+AudioConnection          patchCord27(mix_out_r, 0, usb1, 1);
+AudioConnection          patchCord28(mix_out_r, 0, i2s1, 1);
 AudioControlSGTL5000     sgtl5000_1;     //xy=911,298
 // GUItool: end automatically generated code
 
-WaveformInstrument wave1  = WaveformInstrument("Waveform1", &waveform1, &env_w_1, &reverb_w_1, &mixer_w, 0);
-WaveformInstrument wave2  = WaveformInstrument("Waveform2", &waveform2, &env_w_2, &reverb_w_2, &mixer_w, 1);
-//WaveformInstrument wave3  = WaveformInstrument("Waveform3", &waveform3, &env_w_3, &reverb_w_3, &mixer_w, 2);
-//WaveformInstrument wave4  = WaveformInstrument("Waveform4", &waveform4, &env_w_4, &reverb_w_4, &mixer_w, 3);
-NoiseInstrument    nois1 = NoiseInstrument("Noise1", &noise1, &filter_n_1, &env_n_1, &mixer1, 1);
+WaveformInstrument wave1  = WaveformInstrument("Waveform1", &waveform1, &env_w1, &mixer_w_l, &mixer_w_r, 0, 0);
+WaveformInstrument wave2  = WaveformInstrument("Waveform2", &waveform2, &env_w2, &mixer_w_l, &mixer_w_r, 1, 1);
 
 Encoder enc1(26, 25);
 Encoder enc2(34, 17);
@@ -150,11 +128,16 @@ void setup() {
   
   blank();
 
+  pinMode(PCTL_PIN, OUTPUT);
+  digitalWrite(PCTL_PIN, HIGH);
+
   pinMode(BATT_STAT1_PIN, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(BATT_STAT1_PIN), batt_stat1_changed, CHANGE);
   
   pinMode(BATT_STAT2_PIN, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(BATT_STAT2_PIN), batt_stat2_changed, CHANGE);
+
+  pinMode(4, OUTPUT);
   
   enc1.write(0);
   enc2.write(0);
@@ -165,38 +148,14 @@ void setup() {
 
   AudioNoInterrupts();
 
-  noise1.amplitude(1.0f);
-
-  // Noise
-  env_n_1.hold(0);
-  env_n_1.attack(0);
-  env_n_1.hold(0);
-  env_n_1.decay(100);
-  env_n_1.sustain(0.0f);
-  env_n_1.release(1); 
-  env_n_1.releaseNoteOn(0);
-  filter_n_1.frequency(8000);
-
   // Triangle
-  env_w_1.hold(0);
-  env_w_1.attack(10);
-  env_w_1.hold(0);
-  env_w_1.decay(1000);
-  env_w_1.sustain(0.0f);
-  env_w_1.release(1); 
-  env_w_1.releaseNoteOn(0);
-
-  reverb_w_1.setBypass(true);
-  reverb_w_2.setBypass(true);
-
-  // String
-  env_st_1.hold(0);
-  env_st_1.attack(20);
-  env_st_1.hold(0);
-  env_st_1.decay(1000);
-  env_st_1.sustain(0.0f);
-  env_st_1.release(1); 
-  env_st_1.releaseNoteOn(0);
+  env_w1.hold(0);
+  env_w1.attack(10);
+  env_w1.hold(0);
+  env_w1.decay(1000);
+  env_w1.sustain(0.0f);
+  env_w1.release(1); 
+  env_w1.releaseNoteOn(0);
 
   sgtl5000_1.enable();
   sgtl5000_1.volume(0.25);
@@ -264,6 +223,9 @@ void loop() {
   static long cycles = 0;
   static long last_status = 0;
 
+  analogWrite(4, sin(((float)millis() / 1000.0f)) * 255.0f); // 
+
+
   ms = millis();
   if (playing && ms >= next_tick) {
     next_tick = ms + (long)(60000.0f / bpm / 4.0f);
@@ -278,20 +240,15 @@ void loop() {
     for (inst = 0; inst < NUMINST; inst++) {
       if (notes[inst][tick / NUMCOLS][tick % NUMCOLS]) {
         if (inst == 0) {
-          env_n_1.noteOn();
         }
         if (inst == 1) {
-          drum1.frequency(50);
-          drum1.noteOn();
         }
         if (inst == 2) {
-          waveform1.begin(1.0f, tones[notes[inst][tick / NUMCOLS][tick % NUMCOLS]], WAVEFORM_TRIANGLE);
-          env_w_1.decay((60000.0f / bpm / 4.0f));
-          env_w_1.noteOn();
+          waveform1.begin(1.0f, tone_to_freq(notes[inst][tick / NUMCOLS][tick % NUMCOLS], 3), WAVEFORM_TRIANGLE);
+          env_w1.decay((60000.0f / bpm / 4.0f));
+          env_w1.noteOn();
         }
         if (inst == 3) {
-          string1.noteOn(261.6f, 1.0f);
-          env_st_1.noteOn();
         }
         if (inst == current_inst) {
           leds[tick / NUMCOLS][tick % NUMCOLS] = true;
@@ -393,7 +350,7 @@ void loop() {
   for(y = 0; y < NUMROWS; y++) {
     for(x = 0; x < NUMCOLS; x++) {
       if (leds[y][x] == true) {
-        strip.setPixelColor(row_col_to_led(y, x), 0x080000);
+        strip.setPixelColor(row_col_to_led(y, x), 0x002030);
       } else {
         if (tick == y * NUMCOLS + x) {
           strip.setPixelColor(row_col_to_led(y, x), 0x000008);
@@ -408,8 +365,6 @@ void loop() {
   scan_buttons();
  
   if (millis() >= last_status + STATUS_INTERVAL) {
-
-    Serial.println(reverb_w_1.isActive());
 
     vbat = (float)analogRead(VBAT_PIN) / 1024.0f * 3.3f * VBAT_DIVIDER;
 
@@ -525,10 +480,15 @@ void play_note(uint16_t which_note) {
   Serial.print("Playing note");
   Serial.println(which_note);
 
-  waveform1.begin(1.0f, tones[which_note + 12], WAVEFORM_TRIANGLE);
-  env_w_1.decay((60000.0f / bpm / 4.0f));
-  env_w_1.noteOn();
+  waveform1.begin(1.0f, tone_to_freq(which_note, 3), WAVEFORM_TRIANGLE);
+  env_w1.decay((60000.0f / bpm / 4.0f));
+  env_w1.noteOn();
+}
 
-  notes[2][tick / NUMCOLS][tick % NUMCOLS] = which_note + 12;
+float tone_to_freq(uint16_t note, uint16_t octave) {
+  if (note >= 12) return 0.0f;
+  if (octave < 1 || octave > 5) return 0.0f;
+
+  return tones[note] * pow(2, octave);
 }
 

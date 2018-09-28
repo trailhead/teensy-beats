@@ -6,10 +6,12 @@
 
 class Instrument {
   protected:
-    Instrument(char *inst_name, AudioMixer4 *p_mix, unsigned int ch) : inst_name_(inst_name), p_mixer_(p_mix), mixer_channel_(ch) {};
+    Instrument(char *inst_name, AudioMixer4 *p_mix_l, AudioMixer4 *p_mix_r, unsigned int ch_l, unsigned int ch_r) : inst_name_(inst_name), p_mix_l_(p_mix_l), p_mix_r_(p_mix_r), ch_l_(ch_l), ch_r_(ch_r) {};
     char *inst_name_;
-    AudioMixer4         *p_mixer_;
-    unsigned int         mixer_channel_;
+    AudioMixer4         *p_mix_l_;
+    AudioMixer4         *p_mix_r_;
+    unsigned int         ch_l_;
+    unsigned int         ch_r_;
 };
 
 class WaveformInstrument : public Instrument {
@@ -17,31 +19,14 @@ class WaveformInstrument : public Instrument {
     WaveformInstrument(char *inst_name,
                        AudioSynthWaveform     *p_wf,
                        AudioEffectEnvelope    *p_env,
-                       AudioEffectReverb      *p_rev,
-                       AudioMixer4            *p_mix,
-                       unsigned int           ch
-    ) : Instrument(inst_name, p_mix, ch), p_waveform_(p_wf), p_env_(p_env), p_reverb_(p_rev) {};
+                       AudioMixer4            *p_mix_l,
+                       AudioMixer4            *p_mix_r,
+                       unsigned int           ch_l,
+                       unsigned int           ch_r
+    ) : Instrument(inst_name, p_mix_l, p_mix_r, ch_l, ch_r), p_waveform_(p_wf), p_env_(p_env) {};
   private:
     AudioSynthWaveform  *p_waveform_;
     AudioEffectEnvelope *p_env_;
-    AudioEffectReverb   *p_reverb_;
-};
-
-class NoiseInstrument : public Instrument {
-  public:
-    NoiseInstrument(char *inst_name,
-                    AudioSynthNoiseWhite        *p_noise,
-                    AudioFilterStateVariable    *p_filter,
-                    AudioEffectEnvelope         *p_env,
-                    AudioMixer4                 *p_mix,
-                    unsigned int                ch
-
-    ) : Instrument(inst_name, p_mix, ch), p_noise_(p_noise), p_filter_(p_filter), p_env_(p_env) {};
-  private:
-    AudioSynthNoiseWhite      *p_noise_;
-    AudioFilterStateVariable  *p_filter_;
-    AudioEffectEnvelope       *p_env_;
-    AudioEffectReverb         *p_reverb_;
 };
 
 #endif // __INSTRUMENT_H__

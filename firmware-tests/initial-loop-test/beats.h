@@ -16,8 +16,10 @@
 #define SCREEN_HEIGHT   240
 #define SCREEN_WIDTH    320
 
-#define BATT_STAT1_PIN  4
-#define BATT_STAT2_PIN  5
+#define PCTL_PIN        5
+
+#define BATT_STAT1_PIN  15
+#define BATT_STAT2_PIN  16
 #define HIZ_TIMEOUT     200 // ms of stable state to reset high-z state
 #define HIZ_COUNT       5   // minimum pin changes under HIZ_TIMEOUT to indicate we're in high-z state
 
@@ -54,7 +56,7 @@ extern long buttons[NUMROWS][NUMCOLS];
 extern uint8_t notes[NUMINST][NUMROWS][NUMCOLS];
 extern boolean playing;
 extern float bpm;
-extern uint16_t tones[];
+extern float tones[];
 
 #define DEFAULT_NOTE  12
 
