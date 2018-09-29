@@ -3,7 +3,12 @@
 
 KeysScreen k = KeysScreen();
 HomeScreen h = HomeScreen();
+WaveformInstrumentSettings wf_set = WaveformInstrumentSettings();
+
 UiScreen *current_screen = &h;
+
+void tempo_encoder_onchange(boolean clockwise, long value);
+void channel_encoder_onchange(boolean clockwise, long value);
 
 bool UiItem::HitTest(uint16_t touch_x, uint16_t touch_y) {
   if (touch_x >= x_ && touch_x <= x_ + w_ && touch_y >= y_ && touch_y <= y_ + h_) {
@@ -81,6 +86,11 @@ void HomeScreen::Draw(boolean force_refresh) {
   static int last_bpm = 0;
   static int last_channel = 0;
   static int last_pattern = 0;
+
+  if (force_refresh) {
+    encoder1.setCallback(&tempo_encoder_onchange);
+    encoder2.setCallback(&channel_encoder_onchange);
+  }
   
   for (unsigned i = 0; i < 16; i++) {
     if (tick == i) {
@@ -140,6 +150,16 @@ bool HomeScreen::OnTouch(uint16_t touch_x, uint16_t touch_y) {
     k.Draw(true);
     current_screen = &k;
   }
+  if (play_button_.HitTest(touch_x, touch_y) == true) {
+    playing = !playing;
+    play_button_.Draw(true);
+  }
+  if (instrument_button_.HitTest(touch_x, touch_y) == true) {
+    tft.fillScreen(ILI9341_BLACK);
+    wf_set.Draw(true);
+    current_screen = &wf_set;
+    return true;
+  }
 }
 
 void PlayButton::Draw(boolean force_refresh) {
@@ -198,4 +218,78 @@ bool KeysScreen::OnTouch(uint16_t touch_x, uint16_t touch_y) {
   
   return false;
 }
+
+void WaveformInstrumentSettings::Draw(boolean force_refresh) {
+  for (int i = 0; i < sizeof(p_children_) / sizeof(UiItem*); i++) {
+    p_children_[i]->Draw(force_refresh);
+  }
+}
+
+bool WaveformInstrumentSettings::OnTouch(uint16_t touch_x, uint16_t touch_y) {
+  for (int i = 0; i < sizeof(p_children_) / sizeof(UiItem*); i++) {
+    if (p_children_[i]->HitTest(touch_x, touch_y) == true) {
+      Serial.println("touched");
+    }
+  }
+}
+
+
+void tempo_encoder_onchange(boolean clockwise, long value) {
+  if (clockwise) {
+    if (playing) {
+      bpm -= 5;
+      if (bpm < 50) {
+        bpm = 50;
+      }
+    } else {
+      tick--;      
+      if (tick < 0) {
+        tick = NUMTICKS - 1;
+      }
+    }
+  } else {
+    if (playing) {
+      bpm += 5;
+      if (bpm > 250) {
+        bpm = 250;
+      }
+    } else {
+      tick++;
+      if (tick >= NUMTICKS) {
+        tick = 0;
+      }
+    }
+  }
+}
+
+void channel_encoder_onchange(boolean clockwise, long value) {
+  if (clockwise) {
+    if (playing) {
+      current_inst--;
+      if (current_inst < 0) {
+        current_inst = NUMINST - 1;
+      }
+    } else {
+      notes[current_inst][tick / NUMCOLS][tick % NUMCOLS]--;      
+      if (notes[current_inst][tick / NUMCOLS][tick % NUMCOLS] <= 0) {
+        notes[current_inst][tick / NUMCOLS][tick % NUMCOLS] = sizeof(tones) / sizeof(uint16_t) - 1;
+      }
+      draw_freq();
+    }
+  } else {
+    if (playing) {
+      current_inst++;
+      if (current_inst >= NUMINST) {
+        current_inst = 0;
+      }
+    } else {
+      notes[current_inst][tick / NUMCOLS][tick % NUMCOLS]++;      
+      if (notes[current_inst][tick / NUMCOLS][tick % NUMCOLS] >= sizeof(tones) / sizeof(uint16_t)) {
+        notes[current_inst][tick / NUMCOLS][tick % NUMCOLS] = 1;
+      }
+      draw_freq();
+    }
+  }
+}
+
 

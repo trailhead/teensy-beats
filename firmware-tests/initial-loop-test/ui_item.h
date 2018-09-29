@@ -104,8 +104,9 @@ protected:
   UiItem pattern_button_ = UiItem(161, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, nullptr);
   UiItem settings_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Settings");
   UiItem keyboard_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_HEIGHT * 3 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Keyboard");
+  UiItem instrument_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_HEIGHT * 2 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Inst.");
 
-  UiItem *p_children_[21] = {
+  UiItem *p_children_[22] = {
     &note_buttons_[0],
     &note_buttons_[1],
     &note_buttons_[2],
@@ -126,7 +127,8 @@ protected:
     &channel_button_,
     &pattern_button_,
     &settings_button_,
-    &keyboard_button_
+    &keyboard_button_,
+    &instrument_button_
   };
 
 public:
@@ -187,6 +189,28 @@ public:
 
 };
 
+class WaveformInstrumentSettings : public UiScreen {
+protected:
+  UiItem attack_button_ = PlayButton(1, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Attack");
+  UiItem decay_button_ = UiItem(81, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Decay");
+  UiItem sustain_button_ = UiItem(161, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Sustain");
+  UiItem release_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Release");  
+
+  UiItem *p_children_[4] = {
+    &attack_button_,
+    &decay_button_,
+    &sustain_button_,
+    &release_button_
+  };
+
+public:
+  WaveformInstrumentSettings(void) {};
+  void Draw(boolean force_refresh);
+  bool OnTouch(uint16_t touch_x, uint16_t touch_y);
+
+};
+
+extern WaveformInstrumentSettings wf_set;
 extern KeysScreen k;
 extern HomeScreen h;
 extern UiScreen *current_screen;

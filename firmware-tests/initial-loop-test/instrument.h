@@ -2,31 +2,63 @@
 #define __INSTRUMENT_H__
 
 #include "beats.h"
-#include <Audio.h>
 
 class Instrument {
   protected:
-    Instrument(char *inst_name, AudioMixer4 *p_mix_l, AudioMixer4 *p_mix_r, unsigned int ch_l, unsigned int ch_r) : inst_name_(inst_name), p_mix_l_(p_mix_l), p_mix_r_(p_mix_r), ch_l_(ch_l), ch_r_(ch_r) {};
-    char *inst_name_;
-    AudioMixer4         *p_mix_l_;
-    AudioMixer4         *p_mix_r_;
-    unsigned int         ch_l_;
-    unsigned int         ch_r_;
+    Instrument() {
+      pan_ = 0;
+      vol_ = 1.0f;
+    };
+    char name_[20];
+    float pan_;
+    float vol_;
+
+  public:
+    virtual void playNote(uint8_t note, uint8_t octave, uint8_t vol) = 0;
+    float getPan(void) { return pan_; }
+    void setPan(float p) { pan_ = p; }
+    float getVol(void) { return vol_; }
+    void setVol(float v) { vol_ = v; }
 };
 
 class WaveformInstrument : public Instrument {
+  protected:
+    float attack_;
+    float hold_;
+    float decay_;
+    float sustain_;
+    float release_;
+    short tone_type_;
+  
   public:
-    WaveformInstrument(char *inst_name,
-                       AudioSynthWaveform     *p_wf,
-                       AudioEffectEnvelope    *p_env,
-                       AudioMixer4            *p_mix_l,
-                       AudioMixer4            *p_mix_r,
-                       unsigned int           ch_l,
-                       unsigned int           ch_r
-    ) : Instrument(inst_name, p_mix_l, p_mix_r, ch_l, ch_r), p_waveform_(p_wf), p_env_(p_env) {};
-  private:
-    AudioSynthWaveform  *p_waveform_;
-    AudioEffectEnvelope *p_env_;
+    WaveformInstrument() {};
+    void playNote(uint8_t note, uint8_t octave, uint8_t vol);
+
+    float getAttack(void) { return attack_; }
+    void setAttack(float a) { attack_ = a; }
+    float getHold(void) { return hold_; }    
+    void setHold(float h) { hold_ = h; }
+    float getDecay(void) { return decay_; }
+    void setDecay(float d) { decay_ = d; }
+    float getSustain(void) { return sustain_; }
+    void setSustain(float s) { sustain_ = s; }
+    float getRelease(void) { return release_; }
+    void setRelease(float r) { release_ = r; }
+    short getToneType(void) { return tone_type_; }
+    void setToneType(short t) { tone_type_ = t; }
+};
+
+class PCMInstrument : public Instrument {
+  protected:
+    char *p_paths_[16];
+  
+  public:
+    PCMInstrument() {
+    };
+    void playNote(uint8_t note, uint8_t octave, uint8_t vol);
+
+    char * getPath(uint8_t index) { return p_paths_[index]; };
+    void setPath(uint8_t index, char *path) { if (index >= 12) return; p_paths_[index] = path; };
 };
 
 #endif // __INSTRUMENT_H__
