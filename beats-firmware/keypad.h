@@ -8,7 +8,7 @@ class MultiplexedKeypad {
     uint8_t row_pins_[NUM_BUTTON_ROWS] = { 28, 29, 30, 31, 27 };
     uint8_t col_pins_[NUM_BUTTON_COLS] = { 35, 36, 37, 38, 39 };
 
-    long last_press_[NUM_BUTTON_ROWS][NUM_BUTTON_COLS];
+    unsigned long last_press_[NUM_BUTTON_ROWS][NUM_BUTTON_COLS];
 
     void (*callbacks_[NUM_BUTTON_ROWS][NUM_BUTTON_COLS])(uint8_t, uint8_t);
 

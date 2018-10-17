@@ -35,17 +35,17 @@ class WaveformInstrument : public Instrument {
     void playNote(uint8_t note, uint8_t octave, uint8_t vol);
 
     float getAttack(void) { return attack_; }
-    void setAttack(float a) { attack_ = a; }
+    void setAttack(float a) { attack_ = a >= 0.0f ? a : 0.0f; }
     float getHold(void) { return hold_; }    
-    void setHold(float h) { hold_ = h; }
+    void setHold(float h) { hold_ = h >= 0.0f ? h : 0.0f; }
     float getDecay(void) { return decay_; }
-    void setDecay(float d) { decay_ = d; }
+    void setDecay(float d) { decay_ = d >= 0.0f ? d : 0.0f; }
     float getSustain(void) { return sustain_; }
-    void setSustain(float s) { sustain_ = s; }
+    void setSustain(float s) { sustain_ = s >= 0.0f ? s : 0.0f; }
     float getRelease(void) { return release_; }
-    void setRelease(float r) { release_ = r; }
+    void setRelease(float r) { release_ = r >= 0.0f ? r : 0.0f; }
     short getToneType(void) { return tone_type_; }
-    void setToneType(short t) { tone_type_ = t; }
+    void setToneType(short t) { tone_type_ = t; if (tone_type_ > WAVEFORM_TRIANGLE) tone_type_ = 0; if (tone_type_ < 0) tone_type_ = WAVEFORM_TRIANGLE; }
 };
 
 class PCMInstrument : public Instrument {

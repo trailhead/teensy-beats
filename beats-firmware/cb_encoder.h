@@ -21,9 +21,9 @@ public:
     }
 
     if (value_new < last_value_) {
-      clockwise = true;
-    } else {
       clockwise = false;
+    } else {
+      clockwise = true;
     }
     last_value_ = value_new;
 

@@ -1,5 +1,6 @@
 #include "beats.h"
 #include "ui_item.h"
+#include "music.h"
 
 KeysScreen k = KeysScreen();
 HomeScreen h = HomeScreen();
@@ -7,8 +8,14 @@ WaveformInstrumentSettings wf_set = WaveformInstrumentSettings();
 
 UiScreen *current_screen = &h;
 
+void draw_freq(void);
 void tempo_encoder_onchange(boolean clockwise, long value);
 void channel_encoder_onchange(boolean clockwise, long value);
+void attack_encoder_onchange(boolean clockwise, long value);
+void decay_encoder_onchange(boolean clockwise, long value);
+void sustain_encoder_onchange(boolean clockwise, long value);
+void release_encoder_onchange(boolean clockwise, long value);
+void waveform_encoder_onchange(boolean clockwise, long value);
 
 bool UiItem::HitTest(uint16_t touch_x, uint16_t touch_y) {
   if (touch_x >= x_ && touch_x <= x_ + w_ && touch_y >= y_ && touch_y <= y_ + h_) {
@@ -57,7 +64,7 @@ void UiItem::SetBackground(uint16_t new_bg) {
 }
 
 void UiItem::SetText(char *new_text) {
-  if (new_text != text_ || ((new_text != nullptr && text_ != nullptr) && strcmp(const_cast<const char*>(new_text),const_cast<const char*>(text_)) != 0)) {
+  if (new_text != text_ || ((new_text != nullptr && text_ != nullptr) && strcmp(const_cast<const char*>(new_text), const_cast<const char*>(text_)) != 0)) {
     dirty_ = true;
   }
   text_ = new_text;
@@ -77,21 +84,23 @@ HomeScreen::HomeScreen(void) {
       note_buttons_[index].w_ = 46;
       note_buttons_[index].h_ = BUTTON_HEIGHT - BUTTON_SPACING;
       note_buttons_[index].x_ = BUTTON_SPACING / 2 + col * 48;
-      note_buttons_[index].y_ = (STATUS_HEIGHT + BUTTON_SPACING / 2) + row * BUTTON_HEIGHT;
+      note_buttons_[index].y_ = (STATUS_HEIGHT + BUTTON_SPACING / 2) + row * BUTTON_HEIGHT + BUTTON_HEIGHT;
     }
   }
 };
+
+void HomeScreen::Setup(void) {
+  encoder1.setCallback(&tempo_encoder_onchange);
+  encoder2.setCallback(&channel_encoder_onchange);
+  encoder3.clearCallback();
+  encoder4.clearCallback();
+}
 
 void HomeScreen::Draw(boolean force_refresh) {
   static int last_bpm = 0;
   static int last_channel = 0;
   static int last_pattern = 0;
 
-  if (force_refresh) {
-    encoder1.setCallback(&tempo_encoder_onchange);
-    encoder2.setCallback(&channel_encoder_onchange);
-  }
-  
   for (unsigned i = 0; i < 16; i++) {
     if (tick == i) {
       note_buttons_[i].SetBorder(true);
@@ -113,7 +122,7 @@ void HomeScreen::Draw(boolean force_refresh) {
   }
 
   sprintf(chan_buf_, "Ch %d", current_inst + 1);
-  channel_button_.SetText(chan_buf_);  
+  channel_button_.SetText(chan_buf_);
   if (last_channel != current_inst) {
     channel_button_.SetDirty();
   }
@@ -131,6 +140,16 @@ void HomeScreen::Draw(boolean force_refresh) {
   last_bpm = bpm;
   last_channel = current_inst;
   last_pattern = 1;
+
+  /*
+  char buf[] = "       ";
+  tft.setFont(Marial_18);
+  tft.setTextColor(ILI9341_WHITE, ILI9341_BLACK);
+  tft.setCursor(200,180);
+  //tft.print("﻿1♪2♫3♯4♯5");
+  tft.print(buf);
+  tft.setFont(Arial_9);
+  */
 }
 
 bool HomeScreen::OnTouch(uint16_t touch_x, uint16_t touch_y) {
@@ -146,18 +165,18 @@ bool HomeScreen::OnTouch(uint16_t touch_x, uint16_t touch_y) {
     }
   }
   if (keyboard_button_.HitTest(touch_x, touch_y) == true) {
-    tft.fillScreen(ILI9341_BLACK);
-    k.Draw(true);
-    current_screen = &k;
+    change_screen(&k);
   }
   if (play_button_.HitTest(touch_x, touch_y) == true) {
     playing = !playing;
     play_button_.Draw(true);
   }
   if (instrument_button_.HitTest(touch_x, touch_y) == true) {
-    tft.fillScreen(ILI9341_BLACK);
-    wf_set.Draw(true);
-    current_screen = &wf_set;
+    change_screen(&wf_set);
+    return true;
+  }
+  if (clear_button_.HitTest(touch_x, touch_y) == true) {
+    clear_channel(current_inst);
     return true;
   }
 }
@@ -173,7 +192,7 @@ void PlayButton::Draw(boolean force_refresh) {
       tft.fillRect(x_ + (float)w_ / 8.0f, y_ + h_ / 4, w_ / 8, h_ / 2, ILI9341_WHITE);
       tft.fillRect(x_ + (float)w_ / 8.0f * 2.5f, y_ + h_ / 4, w_ / 8, h_ / 2, ILI9341_WHITE);
     }
-  
+
     tft.setFont(Arial_9);
     tft.setCursor(x_ + (float)w_ / 2.0f, y_ + (float)h_ / 2.0f - tft.getTextSize() * 4);
     tft.print(text_);
@@ -181,7 +200,7 @@ void PlayButton::Draw(boolean force_refresh) {
   dirty_ = false;
 }
 
-KeysScreen::KeysScreen(void) {  
+KeysScreen::KeysScreen(void) {
   for (int key = 0; key < 7; key++) {
     key_buttons_[key].w_ = keys_width_;
     key_buttons_[key].h_ = SCREEN_HEIGHT - STATUS_HEIGHT - BUTTON_HEIGHT - BUTTON_SPACING;
@@ -194,6 +213,9 @@ KeysScreen::KeysScreen(void) {
   key_buttons_[10].x_ = keys_spacing_ * 5 - keys_spacing_ / 2 - BUTTON_SPACING / 2;
   key_buttons_[11].x_ = keys_spacing_ * 6 - keys_spacing_ / 2 - BUTTON_SPACING / 2;
 };
+
+void KeysScreen::Setup(void) {
+}
 
 void KeysScreen::Draw(boolean force_refresh) {
   for (int i = 0; i < sizeof(p_children_) / sizeof(UiItem*); i++) {
@@ -210,16 +232,51 @@ bool KeysScreen::OnTouch(uint16_t touch_x, uint16_t touch_y) {
     }
   }
   if (home_button_.HitTest(touch_x, touch_y) == true) {
-    tft.fillScreen(ILI9341_BLACK);
-    h.Draw(true);
-    current_screen = &h;
+    change_screen(&h);
     return true;
   }
-  
+
   return false;
 }
 
+void WaveformInstrumentSettings::Setup(void) {
+  encoder1.setCallback(&attack_encoder_onchange);    
+  encoder2.setCallback(&decay_encoder_onchange);    
+  encoder3.setCallback(&sustain_encoder_onchange);    
+  encoder4.setCallback(&release_encoder_onchange);    
+}
+
 void WaveformInstrumentSettings::Draw(boolean force_refresh) {
+  if (p_inst_ != nullptr) {    
+    sprintf(attack_buf_, "A ");
+    dtostrf(p_inst_->getAttack(), 7, 1, attack_buf_ + 2);
+
+    sprintf(decay_buf_, "D ");
+    dtostrf(p_inst_->getDecay(), 7, 1, decay_buf_ + 2);
+
+    sprintf(sustain_buf_, "S ");
+    dtostrf(p_inst_->getSustain(), 7, 1, sustain_buf_ + 2);
+
+    sprintf(release_buf_, "R ");
+    dtostrf(p_inst_->getRelease(), 7, 1, release_buf_ + 2);
+
+    switch(p_inst_->getToneType()) {
+      case WAVEFORM_SINE:
+        waveform_button_.SetText("Sine");
+        break;
+      case WAVEFORM_SAWTOOTH:
+        waveform_button_.SetText("Sawtooth");
+        break;
+      case WAVEFORM_SQUARE:
+        waveform_button_.SetText("Square");
+        break;
+      case WAVEFORM_TRIANGLE:
+        waveform_button_.SetText("Triangle");
+        break;
+    }
+  }
+
+
   for (int i = 0; i < sizeof(p_children_) / sizeof(UiItem*); i++) {
     p_children_[i]->Draw(force_refresh);
   }
@@ -228,7 +285,24 @@ void WaveformInstrumentSettings::Draw(boolean force_refresh) {
 bool WaveformInstrumentSettings::OnTouch(uint16_t touch_x, uint16_t touch_y) {
   for (int i = 0; i < sizeof(p_children_) / sizeof(UiItem*); i++) {
     if (p_children_[i]->HitTest(touch_x, touch_y) == true) {
-      Serial.println("touched");
+    }
+    if (waveform_button_.HitTest(touch_x, touch_y) == true) {
+      release_button_.SetBackground(ILI9341_BLUE);
+      waveform_button_.SetBackground(ILI9341_RED);
+      pan_button_.SetBackground(ILI9341_BLUE);
+      encoder4.setCallback(&waveform_encoder_onchange);    
+    }
+    if (release_button_.HitTest(touch_x, touch_y) == true) {
+      release_button_.SetBackground(ILI9341_RED);
+      waveform_button_.SetBackground(ILI9341_BLUE);
+      pan_button_.SetBackground(ILI9341_BLUE);
+      encoder4.setCallback(&release_encoder_onchange);    
+    }
+    if (pan_button_.HitTest(touch_x, touch_y) == true) {
+      release_button_.SetBackground(ILI9341_BLUE);
+      waveform_button_.SetBackground(ILI9341_BLUE);
+      pan_button_.SetBackground(ILI9341_RED);
+      encoder4.setCallback(&release_encoder_onchange);    
     }
   }
 }
@@ -236,18 +310,6 @@ bool WaveformInstrumentSettings::OnTouch(uint16_t touch_x, uint16_t touch_y) {
 
 void tempo_encoder_onchange(boolean clockwise, long value) {
   if (clockwise) {
-    if (playing) {
-      bpm -= 5;
-      if (bpm < 50) {
-        bpm = 50;
-      }
-    } else {
-      tick--;      
-      if (tick < 0) {
-        tick = NUMTICKS - 1;
-      }
-    }
-  } else {
     if (playing) {
       bpm += 5;
       if (bpm > 250) {
@@ -259,37 +321,143 @@ void tempo_encoder_onchange(boolean clockwise, long value) {
         tick = 0;
       }
     }
+  } else {
+    if (playing) {
+      bpm -= 5;
+      if (bpm < 50) {
+        bpm = 50;
+      }
+    } else {
+      tick--;
+      if (tick < 0) {
+        tick = NUMTICKS - 1;
+      }
+    }
   }
 }
 
 void channel_encoder_onchange(boolean clockwise, long value) {
   if (clockwise) {
     if (playing) {
-      current_inst--;
-      if (current_inst < 0) {
-        current_inst = NUMINST - 1;
-      }
-    } else {
-      notes[current_inst][tick / NUMCOLS][tick % NUMCOLS]--;      
-      if (notes[current_inst][tick / NUMCOLS][tick % NUMCOLS] <= 0) {
-        notes[current_inst][tick / NUMCOLS][tick % NUMCOLS] = sizeof(tones) / sizeof(uint16_t) - 1;
-      }
-      draw_freq();
-    }
-  } else {
-    if (playing) {
       current_inst++;
       if (current_inst >= NUMINST) {
         current_inst = 0;
       }
     } else {
-      notes[current_inst][tick / NUMCOLS][tick % NUMCOLS]++;      
-      if (notes[current_inst][tick / NUMCOLS][tick % NUMCOLS] >= sizeof(tones) / sizeof(uint16_t)) {
+      notes[current_inst][tick / NUMCOLS][tick % NUMCOLS]++;
+      if (notes[current_inst][tick / NUMCOLS][tick % NUMCOLS] >= sizeof(tones) / sizeof(tones[0])) {
         notes[current_inst][tick / NUMCOLS][tick % NUMCOLS] = 1;
       }
-      draw_freq();
+      //draw_freq();
     }
+  } else {
+    if (playing) {
+      current_inst--;
+      if (current_inst < 0) {
+        current_inst = NUMINST - 1;
+      }
+    } else {
+      notes[current_inst][tick / NUMCOLS][tick % NUMCOLS]--;
+      if (notes[current_inst][tick / NUMCOLS][tick % NUMCOLS] <= 0) {
+        notes[current_inst][tick / NUMCOLS][tick % NUMCOLS] = sizeof(tones) / sizeof(tones[0]) - 1;
+      }
+      //draw_freq();
+    }
+  }
+  switch (current_inst) {
+    case 0:
+      wf_set.SetInstrument(&wf_inst1);
+      break;
+    case 1:
+      wf_set.SetInstrument(&wf_inst1);
+      break;
+    case 2:
+      wf_set.SetInstrument(&wf_inst2);
+      break;
+    case 3:
+      wf_set.SetInstrument(&wf_inst3);
+      break;
   }
 }
 
+void draw_freq(void) {
+  tft.fillRect(100, 15, 100, 15, ILI9341_BLACK);
+  if (!playing) {
+    tft.setCursor(100,15);
+    tft.print("Freq ");
+    tft.print(tones[notes[current_inst][tick / NUMCOLS][tick % NUMCOLS]]);
+  }
+}
+
+void attack_encoder_onchange(boolean clockwise, long value) {
+  WaveformInstrument *p_inst = wf_set.GetInstrument();
+
+  if (p_inst != nullptr) {
+    if (clockwise) {
+      p_inst->setAttack(p_inst->getAttack() + 10.0f);
+    } else {
+      p_inst->setAttack(p_inst->getAttack() - 10.0f);
+    }
+    wf_set.Draw(true);
+  }
+}
+
+void decay_encoder_onchange(boolean clockwise, long value) {
+  WaveformInstrument *p_inst = wf_set.GetInstrument();
+
+  if (p_inst != nullptr) {
+    if (clockwise) {
+      p_inst->setDecay(p_inst->getDecay() + 10.0f);
+    } else {
+      p_inst->setDecay(p_inst->getDecay() - 10.0f);
+    }
+    wf_set.Draw(true);
+  }
+}
+
+void sustain_encoder_onchange(boolean clockwise, long value) {
+  WaveformInstrument *p_inst = wf_set.GetInstrument();
+
+  if (p_inst != nullptr) {
+    if (clockwise) {
+      p_inst->setSustain(p_inst->getSustain() + 0.1f);
+    } else {
+      p_inst->setSustain(p_inst->getSustain() - 0.1f);
+    }
+    wf_set.Draw(true);
+  }
+}
+
+void release_encoder_onchange(boolean clockwise, long value) {
+  WaveformInstrument *p_inst = wf_set.GetInstrument();
+
+  if (p_inst != nullptr) {
+    if (clockwise) {
+      p_inst->setRelease(p_inst->getRelease() + 10.0f);
+    } else {
+      p_inst->setRelease(p_inst->getRelease() - 10.0f);
+    }
+    wf_set.Draw(true);
+  }
+}
+
+void waveform_encoder_onchange(boolean clockwise, long value) {
+  WaveformInstrument *p_inst = wf_set.GetInstrument();
+
+  if (p_inst != nullptr) {
+    if (clockwise) {
+      p_inst->setToneType(p_inst->getToneType() + 1);
+    } else {
+      p_inst->setToneType(p_inst->getToneType() - 1);
+    }
+    wf_set.Draw(true);
+  }
+}
+
+void change_screen(UiScreen *p_new) {
+  tft.fillScreen(ILI9341_BLACK);
+  current_screen = p_new;
+  current_screen->Setup();
+  current_screen->Draw(true);  
+}
 

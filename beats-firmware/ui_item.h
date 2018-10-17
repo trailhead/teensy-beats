@@ -61,6 +61,7 @@ protected:
 
 public:
   virtual void Draw(boolean force_refresh = false) = 0;
+  virtual void Setup(void);
   virtual bool OnTouch(uint16_t touch_x, uint16_t touch_y);
 };
 
@@ -99,14 +100,15 @@ protected:
     UiItem(84, 126, 40, 40, 4, ILI9341_RED, 0, "15"),
     UiItem(126, 126, 40, 40, 4, ILI9341_RED, 0, "16")
   };
-  PlayButton play_button_ = PlayButton(1, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, nullptr);
-  UiItem channel_button_ = UiItem(81, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, nullptr);
-  UiItem pattern_button_ = UiItem(161, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, nullptr);
-  UiItem settings_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Settings");
-  UiItem keyboard_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_HEIGHT * 3 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Keyboard");
-  UiItem instrument_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_HEIGHT * 2 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Inst.");
+  PlayButton play_button_ = PlayButton(1, STATUS_HEIGHT + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, nullptr);
+  UiItem channel_button_ = UiItem(81, STATUS_HEIGHT + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, nullptr);
+  UiItem pattern_button_ = UiItem(161, STATUS_HEIGHT + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, nullptr);
+  UiItem settings_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Settings");
+  UiItem keyboard_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_HEIGHT + BUTTON_SPACING, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Keyboard");
+  UiItem instrument_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_HEIGHT * 2 + BUTTON_SPACING , 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Inst.");
+  UiItem clear_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING , 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Clear");
 
-  UiItem *p_children_[22] = {
+  UiItem *p_children_[23] = {
     &note_buttons_[0],
     &note_buttons_[1],
     &note_buttons_[2],
@@ -128,11 +130,13 @@ protected:
     &pattern_button_,
     &settings_button_,
     &keyboard_button_,
-    &instrument_button_
+    &instrument_button_,
+    &clear_button_
   };
 
 public:
   HomeScreen(void);
+  void Setup(void);
   void Draw(boolean force_refresh = false);
   bool OnTouch(uint16_t touch_x, uint16_t touch_y);
 
@@ -184,6 +188,7 @@ protected:
 
 public:
   KeysScreen(void);
+  void Setup(void);
   void Draw(boolean force_refresh = false);
   bool OnTouch(uint16_t touch_x, uint16_t touch_y);
 
@@ -191,24 +196,40 @@ public:
 
 class WaveformInstrumentSettings : public UiScreen {
 protected:
-  UiItem attack_button_ = PlayButton(1, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Attack");
-  UiItem decay_button_ = UiItem(81, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Decay");
-  UiItem sustain_button_ = UiItem(161, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Sustain");
-  UiItem release_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_HEIGHT * 4 + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, "Release");  
+  WaveformInstrument *p_inst_ = nullptr;
 
-  UiItem *p_children_[4] = {
+  char attack_buf_[10];
+  char decay_buf_[10];
+  char sustain_buf_[10];
+  char release_buf_[10];
+
+  UiItem attack_button_ = PlayButton(1, STATUS_HEIGHT +  BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, attack_buf_);
+  UiItem decay_button_ = UiItem(81, STATUS_HEIGHT + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, decay_buf_);
+  UiItem sustain_button_ = UiItem(161, STATUS_HEIGHT + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, sustain_buf_);
+  UiItem release_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_SPACING / 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_RED, 0, release_buf_);  
+  UiItem waveform_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_SPACING + BUTTON_HEIGHT, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_BLUE, 0, nullptr);  
+  UiItem pan_button_ = UiItem(241, STATUS_HEIGHT + BUTTON_SPACING + BUTTON_HEIGHT * 2, 78, BUTTON_HEIGHT - BUTTON_SPACING, 4, ILI9341_BLUE, 0, nullptr);  
+
+  UiItem *p_children_[6] = {
     &attack_button_,
     &decay_button_,
     &sustain_button_,
-    &release_button_
+    &release_button_,
+    &waveform_button_,
+    &pan_button_
   };
 
 public:
   WaveformInstrumentSettings(void) {};
+  void Setup(void);
   void Draw(boolean force_refresh);
   bool OnTouch(uint16_t touch_x, uint16_t touch_y);
+  void SetInstrument(WaveformInstrument *p_inst) { p_inst_ = p_inst; };
+  WaveformInstrument *GetInstrument(void) { return p_inst_; };
 
 };
+
+void change_screen(UiScreen *p_new);
 
 extern WaveformInstrumentSettings wf_set;
 extern KeysScreen k;

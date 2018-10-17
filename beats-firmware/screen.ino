@@ -15,12 +15,3 @@ void draw_voltage(void) {
   }
 }
 
-void draw_freq(void) {
-  tft.fillRect(100, 15, 100, 15, ILI9341_BLACK);
-  if (!playing) {
-    tft.setCursor(100,15);
-    tft.print("Freq ");
-    tft.print(tones[notes[current_inst][tick / NUMCOLS][tick % NUMCOLS]]);
-  }
-}
-
