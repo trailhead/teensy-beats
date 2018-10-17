@@ -278,7 +278,7 @@ Text GLabel 10100 5050 2    50   Input ~ 0
 TFT_DC
 Text GLabel 5300 4550 2    50   Input ~ 0
 TFT_CS
-Text GLabel 5300 4650 2    50   Input ~ 0
+Text GLabel 3300 1850 0    50   Input ~ 0
 TFT_DC
 Text GLabel 3300 2650 0    50   Input ~ 0
 KEYPAD_R0
@@ -356,7 +356,7 @@ Text GLabel 3300 3750 0    50   Input ~ 0
 E2B
 Text GLabel 5300 4950 2    50   Input ~ 0
 E2A
-Text GLabel 3300 1850 0    50   Input ~ 0
+Text GLabel 3300 1650 0    50   Input ~ 0
 E3B
 Text GLabel 3300 2250 0    50   Input ~ 0
 E3A
@@ -423,4 +423,6 @@ F 3 "" H 6700 2000 50  0001 C CNN
 	1    6700 2000
 	1    0    0    -1  
 $EndComp
+Text GLabel 5300 4650 2    50   Input ~ 0
+PG
 $EndSCHEMATC

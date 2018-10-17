@@ -24,7 +24,8 @@ _autosave-*
 *.xml
 *.csv
 
+hardware/gerbers/*.zip
 
-gerbs
+#gerbs
 
 .DS_Store

@@ -1033,4 +1033,32 @@ Wire Wire Line
 Connection ~ 2950 5200
 Wire Wire Line
 	2950 5200 3250 5200
+$Comp
+L Connector:Conn_01x02_Male J4
+U 1 1 5BC7B36B
+P 3250 4550
+F 0 "J4" H 3356 4728 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 3356 4637 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch1.27mm" H 3250 4550 50  0001 C CNN
+F 3 "~" H 3250 4550 50  0001 C CNN
+	1    3250 4550
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2350 4550 3050 4550
+$Comp
+L power:+BATT #PWR0156
+U 1 1 5BC8AFCC
+P 2900 4350
+F 0 "#PWR0156" H 2900 4200 50  0001 C CNN
+F 1 "+BATT" H 2915 4523 50  0000 C CNN
+F 2 "" H 2900 4350 50  0001 C CNN
+F 3 "" H 2900 4350 50  0001 C CNN
+	1    2900 4350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2900 4350 2900 4450
+Wire Wire Line
+	2900 4450 3050 4450
 $EndSCHEMATC
