@@ -5,3 +5,5 @@ An all-in-one, made to hack step sequencer built around the Teensy platform with
 
 Project build log and photos here:
 https://hackaday.io/project/161127-teensy-beats-shield
+
+...
