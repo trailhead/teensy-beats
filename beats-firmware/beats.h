@@ -27,7 +27,7 @@
 #define NUMINST               4
 #define NUMTICKS              (NUMROWS*NUMCOLS)
 #define BUTTON_DEBOUNCE       250
-#define VBAT_PIN              A22
+#define VBAT_PIN              A10
 #define VBAT_DIVIDER          2.0f
 
 #define SCREEN_HEIGHT         240
