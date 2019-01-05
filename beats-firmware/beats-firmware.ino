@@ -48,7 +48,7 @@ PCMInstrument pcm_inst1 = PCMInstrument();
 
 CallbackEncoder encoder1(26, 25);
 CallbackEncoder encoder2(34, 17);
-CallbackEncoder encoder3(10, 24);
+CallbackEncoder encoder3(8, 24);
 CallbackEncoder encoder4(3, 2);
 
 float bpm        = 80.0;
