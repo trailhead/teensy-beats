@@ -3,4 +3,7 @@
   (lib (name SparkFun-IC-Analog)(type Legacy)(uri /Users/chris/Downloads/KiCad-Library-master/SparkFun-IC-Analog.lib)(options "")(descr ""))
   (lib (name MyJacks)(type Legacy)(uri "/Users/chris/Documents/Open Op/MyJacks.lib")(options "")(descr ""))
   (lib (name teensy_beats_parts)(type Legacy)(uri "/Users/chris/Documents/Open Op/teensy_beats_parts.lib")(options "")(descr ""))
+  (lib (name teensy_beats-rescue)(type Legacy)(uri ${KIPRJMOD}/teensy_beats-rescue.lib)(options "")(descr ""))
+  (lib (name MK66FX1M0VMD18)(type Legacy)(uri ${KIPRJMOD}/MK66FX1M0VMD18.lib)(options "")(descr ""))
+  (lib (name MKL02Z32VFG4)(type Legacy)(uri ${KIPRJMOD}/MKL02Z32VFG4.lib)(options "")(descr ""))
 )

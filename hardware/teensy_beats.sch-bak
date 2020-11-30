@@ -169,6 +169,30 @@ U 5BA9FA00
 F0 "boost and charge" 50
 F1 "boost_and_charge.sch" 50
 $EndSheet
+$Comp
+L power:VBUS #PWR03
+U 1 1 5BAB918A
+P -600 4100
+F 0 "#PWR03" H -600 3950 50  0001 C CNN
+F 1 "VBUS" H -585 4273 50  0000 C CNN
+F 2 "" H -600 4100 50  0001 C CNN
+F 3 "" H -600 4100 50  0001 C CNN
+	1    -600 4100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR04
+U 1 1 5BABBFA7
+P -350 4100
+F 0 "#PWR04" H -350 3950 50  0001 C CNN
+F 1 "+5V" H -335 4273 50  0000 C CNN
+F 2 "" H -350 4100 50  0001 C CNN
+F 3 "" H -350 4100 50  0001 C CNN
+	1    -350 4100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	-350 4100 -350 4200
 Wire Wire Line
 	8550 5450 8550 5550
 $Comp
@@ -193,6 +217,19 @@ F 1 "+3V3" H 8565 -1727 50  0000 C CNN
 F 2 "" H 8550 -1900 50  0001 C CNN
 F 3 "" H 8550 -1900 50  0001 C CNN
 	1    8550 -1900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	-3850 900  -3850 1150
+$Comp
+L power:GND #PWR01
+U 1 1 5BAC32DC
+P -3850 1150
+F 0 "#PWR01" H -3850 900 50  0001 C CNN
+F 1 "GND" H -3845 977 50  0000 C CNN
+F 2 "" H -3850 1150 50  0001 C CNN
+F 3 "" H -3850 1150 50  0001 C CNN
+	1    -3850 1150
 	1    0    0    -1  
 $EndComp
 $Sheet
@@ -259,6 +296,8 @@ Text GLabel 7900 1650 2    50   Input ~ 0
 KEYPAD_C2
 Text GLabel 7900 1750 2    50   Input ~ 0
 KEYPAD_C3
+Text GLabel -1200 4300 2    50   Input ~ 0
+AGND
 Wire Wire Line
 	10100 5350 10300 5350
 Wire Wire Line
@@ -320,10 +359,16 @@ Wire Wire Line
 	8550 5550 7900 5550
 Text GLabel 4900 2050 0    50   Input ~ 0
 BATT_LEVEL
+Wire Wire Line
+	-1200 4100 -600 4100
+Wire Wire Line
+	-1200 4200 -350 4200
 Text GLabel 7900 2750 2    50   Input ~ 0
 BATT_STAT2
 Text GLabel 7900 650  2    50   Input ~ 0
 BATT_STAT1
+Wire Wire Line
+	-3850 900  -3200 900 
 Wire Wire Line
 	8550 -1650 7900 -1650
 Text GLabel 4900 4450 0    50   Input ~ 0
@@ -603,6 +648,17 @@ F 1 "+5V" H 1715 1573 50  0000 C CNN
 F 2 "" H 1700 1400 50  0001 C CNN
 F 3 "" H 1700 1400 50  0001 C CNN
 	1    1700 1400
+	1    0    0    -1  
+$EndComp
+$Comp
+L teensy_beats_parts:TEENSY3.6-teensy_beats U1
+U 1 1 5B903484
+P -2200 3000
+F 0 "U1" H -2200 5387 60  0000 C CNN
+F 1 "Teensy3.6" H -2200 5281 60  0000 C CNN
+F 2 "teensy_beats_parts:Teensy35_36" H -2200 3000 60  0001 C CNN
+F 3 "" H -2200 3000 60  0000 C CNN
+	1    -2200 3000
 	1    0    0    -1  
 $EndComp
 $Comp
