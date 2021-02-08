@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name teensy_beats_parts)(type Legacy)(uri /Users/chris/Desktop/teensy-beats/hardware/teensy_beats_parts.lib)(options "")(descr ""))
+  (lib (name 629104190121)(type Legacy)(uri ${KIPRJMOD}/629104190121.lib)(options "")(descr ""))
+)

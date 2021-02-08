@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name teensy_beats_parts)(type KiCad)(uri ${KIPRJMOD}/teensy_beats_parts.pretty)(options "")(descr ""))
+)

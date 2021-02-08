@@ -1,4 +1,4 @@
-update=Thursday, November 12, 2020 at 10:56:37 PM
+update=Monday, February 08, 2021 at 02:24:15 AM
 version=1
 last_client=kicad
 [general]
@@ -22,16 +22,18 @@ AllowMicroVias=0
 AllowBlindVias=0
 RequireCourtyardDefinitions=0
 ProhibitOverlappingCourtyards=1
-MinTrackWidth=0.127
+MinTrackWidth=0.09
 MinViaDiameter=0.45
 MinViaDrill=0.2
 MinMicroViaDiameter=0.2
 MinMicroViaDrill=0.09999999999999999
 MinHoleToHole=0.25
 TrackWidth1=0.25
-TrackWidth2=0.127
-TrackWidth3=0.375
-TrackWidth4=0.5
+TrackWidth2=0.09
+TrackWidth3=0.1
+TrackWidth4=0.127
+TrackWidth5=0.375
+TrackWidth6=0.5
 ViaDiameter1=0.8
 ViaDrill1=0.4
 ViaDiameter2=0.45
@@ -232,10 +234,21 @@ Enabled=0
 [pcbnew/Netclasses]
 [pcbnew/Netclasses/Default]
 Name=Default
-Clearance=0.2
+Clearance=0.127
 TrackWidth=0.25
 ViaDiameter=0.8
 ViaDrill=0.4
+uViaDiameter=0.3
+uViaDrill=0.1
+dPairWidth=0.2
+dPairGap=0.25
+dPairViaGap=0.25
+[pcbnew/Netclasses/1]
+Name=OuterBGA
+Clearance=0.09
+TrackWidth=0.09
+ViaDiameter=0.45
+ViaDrill=0.2
 uViaDiameter=0.3
 uViaDrill=0.1
 dPairWidth=0.2

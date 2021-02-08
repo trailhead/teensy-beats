@@ -1,0 +1,35 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# CMS-160916-30-3
+#
+DEF CMS-160916-30-3 LS 0 40 N N 1 L N
+F0 "LS" -151 352 50 H V L BNN
+F1 "CMS-160916-30-3" -151 -453 50 H V L BNN
+F2 "SPKR_CMS-160916-30-3" 0 0 50 H I L BNN
+F3 "" 0 0 50 H I L BNN
+F4 "1.01" 0 0 50 H I L BNN "PARTREV"
+F5 "CUI" 0 0 50 H I L BNN "MANUFACTURER"
+F6 "Manufacturer Recommendations" 0 0 50 H I L BNN "STANDARD"
+DRAW
+P 2 0 0 10 -25 50 0 50 N
+P 2 0 0 10 0 50 25 50 N
+P 2 0 0 10 25 50 25 -50 N
+P 2 0 0 10 25 -50 0 -50 N
+P 2 0 0 10 0 -50 -25 -50 N
+P 2 0 0 10 -25 -50 -25 50 N
+P 2 0 0 10 25 50 75 125 N
+P 2 0 0 10 75 125 75 -125 N
+P 2 0 0 10 75 -125 25 -50 N
+P 2 0 0 10 0 50 0 100 N
+P 2 0 0 10 0 -50 0 -100 N
+T 0 -75 50 70 0 0 0 + Normal 0 L B
+T 0 -75 -150 70 0 0 0 - Normal 0 L B
+X ~ P 0 200 100 D 40 40 0 0 P 
+X ~ N 0 -200 100 U 40 40 0 0 P 
+ENDDRAW
+ENDDEF
+#
+# End Library

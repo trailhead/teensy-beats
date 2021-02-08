@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name MIMXRT1062DVL6A)(type Legacy)(uri ${KIPRJMOD}/MIMXRT1062DVL6A.lib)(options "")(descr ""))
+)
